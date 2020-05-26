@@ -1,15 +1,3 @@
-.buckconfig
-.flowconfig
-.gitattributes
-.prettierrc.js
-.watchmanconfig
-__tests__/
-android/
-ios/
-yarn.lock
-node_modules/
-
-
 # OSX
 #
 .DS_Store
