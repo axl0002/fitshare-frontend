@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 
-import { SearchBar, ListItem, Button, Icon } from 'react-native-elements';
+import { SearchBar, ListItem, Icon } from 'react-native-elements';
 
 const users = [
   {
