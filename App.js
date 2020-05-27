@@ -46,6 +46,12 @@ const App: () => React$Node = () => {
       name="home"
       size={30}
     />
+    <Icon
+      reverse
+      className="camera-button"
+      name="camera-alt"
+      size={15}
+    />
     </SafeAreaView>
   );
 };
