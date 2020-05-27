@@ -6,14 +6,17 @@ import { SearchBar, ListItem } from 'react-native-elements';
 const users = [
   {
     name: 'jack',
+    subtitle: 'New challenge!',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
   },
   {
     name: 'jackson',
+    subtitle: 'Challenge accepted!',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
   },
   {
     name: 'jacklynn',
+    subtitle: 'Challenge sent!',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
   },
 ];
@@ -27,7 +30,7 @@ const App: () => React$Node = () => {
           key={i}
           leftAvatar={{ source: { uri: l.avatar } }}
           title={l.name}
-          subtitle={l.name}
+          subtitle={l.subtitle}
           bottomDivider
         />
       ))}
