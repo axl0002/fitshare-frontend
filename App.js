@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 
-import { SearchBar, ListItem } from 'react-native-elements';
+import { SearchBar, ListItem, Button, Icon } from 'react-native-elements';
 
 const users = [
   {
@@ -34,6 +34,12 @@ const App: () => React$Node = () => {
           bottomDivider
         />
       ))}
+    <Icon
+      reverse
+      className="profile-button"
+      name="person"
+      size={15}
+    />
     </SafeAreaView>
   );
 };
