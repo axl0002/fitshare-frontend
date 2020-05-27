@@ -40,6 +40,12 @@ const App: () => React$Node = () => {
       name="person"
       size={15}
     />
+    <Icon
+      reverse
+      className="home-button"
+      name="home"
+      size={30}
+    />
     </SafeAreaView>
   );
 };
