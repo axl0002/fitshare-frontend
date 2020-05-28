@@ -1,1 +1,0 @@
-eslint app --ext .js
