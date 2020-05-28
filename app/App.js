@@ -5,7 +5,7 @@ import { SearchBar, ListItem, Icon } from 'react-native-elements';
 
 const users = [
   {
-    name: 'jack',
+    name: "jack",
     subtitle: 'New challenge!',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
   },
