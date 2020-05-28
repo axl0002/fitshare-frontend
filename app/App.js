@@ -25,7 +25,9 @@ const users = [
 
 const App: () => React$Node = () => {
   return (
-    <SafeAreaView>
+    // <SafeAreaView>
+
+    <View style = {styles.container}>
       <SearchBar placeholder="Type Here..." />
       {users.map((l, i) => (
         <ListItem
@@ -37,47 +39,49 @@ const App: () => React$Node = () => {
         />
       ))}
 
-    <View style = {styles.bottom}>
-      <View style={styles.navButtons}>
-        <View>
-          <Button
-            icon = {
-              <Icon
-                reverse
-                className="profile-button"
-                name="person"
-                size={15}
-              />
-            }
-          />
-        </View>
-        <View>
-          <Button
-            icon = {
-              <Icon
-                reverse
-                className="home-button"
-                name="home"
-                size={30}
-              />
-            }
-          />
-        </View>
-        <View>
-          <Button
-            icon = {
-              <Icon
-                reverse
-                className="camera-button"
-                name="camera-alt"
-                size={15}
-              />
-            }
-          />
+      <View style={styles.bottom}>
+        <View style={styles.navButtons}>
+          <View>
+            <Button
+              icon = {
+                <Icon
+                  reverse
+                  className="profile-button"
+                  name="person"
+                  size={15}
+                />
+              }
+            />
+          </View>
+          <View>
+            <Button
+              icon = {
+                <Icon
+                  reverse
+                  className="home-button"
+                  name="home"
+                  size={30}
+                />
+              }
+            />
+          </View>
+          <View>
+            <Button
+              icon = {
+                <Icon
+                  reverse
+                  className="camera-button"
+                  name="camera-alt"
+                  size={15}
+                />
+              }
+            />
+          </View>
         </View>
       </View>
+
     </View>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
