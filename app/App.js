@@ -1,7 +1,9 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
 
-import { SearchBar, ListItem, Icon } from 'react-native-elements';
+import { SearchBar, ListItem, Icon, Button } from 'react-native-elements';
+
+import styles from "./css/Styles"
 
 const users = [
   {
@@ -34,26 +36,50 @@ const App: () => React$Node = () => {
           bottomDivider
         />
       ))}
-    <Icon
-      reverse
-      className="profile-button"
-      name="person"
-      size={15}
-    />
-    <Icon
-      reverse
-      className="home-button"
-      name="home"
-      size={30}
-    />
-    <Icon
-      reverse
-      className="camera-button"
-      name="camera-alt"
-      size={15}
-    />
+
+    <View style = {styles.bottom}>
+      <View style={styles.navButtons}>
+        <View>
+          <Button
+            icon = {
+              <Icon
+                reverse
+                className="profile-button"
+                name="person"
+                size={15}
+              />
+            }
+          />
+        </View>
+        <View>
+          <Button
+            icon = {
+              <Icon
+                reverse
+                className="home-button"
+                name="home"
+                size={30}
+              />
+            }
+          />
+        </View>
+        <View>
+          <Button
+            icon = {
+              <Icon
+                reverse
+                className="camera-button"
+                name="camera-alt"
+                size={15}
+              />
+            }
+          />
+        </View>
+      </View>
+    </View>
     </SafeAreaView>
   );
 };
+
 
 export default App;
