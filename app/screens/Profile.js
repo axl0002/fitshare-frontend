@@ -24,7 +24,7 @@ const stats = [
   },  {
       icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
       name: 'challenges completed',
-      value: '97%',
+      value: '97%'
     },
 ];
 
