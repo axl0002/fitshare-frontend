@@ -12,6 +12,7 @@ import styles from './css/Styles';
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Challenge from './screens/Challenge';
+import Camera from './screens/Camera';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,10 @@ function NavStack() {
       <Stack.Screen
         name="Challenge"
         component={Challenge}
+      />
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
       />
     </Stack.Navigator>
   );

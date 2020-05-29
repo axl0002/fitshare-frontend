@@ -42,6 +42,7 @@ function Challenge({ navigation }) {
           className="camera-button"
           name="camera-alt"
           size={15}
+          onPress={() => navigation.navigate('Camera')}
         />
       }
       />
