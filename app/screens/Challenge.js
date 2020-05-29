@@ -35,12 +35,15 @@ function Challenge({ navigation }) {
         </View>
       </View>
 
-
-      <Icon
-        reverse
-        className="camera-button"
-        name="camera-alt"
-        size={15}
+      <Button
+      icon = {
+        <Icon
+          reverse
+          className="camera-button"
+          name="camera-alt"
+          size={15}
+        />
+      }
       />
 
     </View>
