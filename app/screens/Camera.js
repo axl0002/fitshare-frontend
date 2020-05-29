@@ -39,8 +39,23 @@ export default class Camera extends Component {
 
         if (processing) {
           button = (
-            <View style={styles.capture}>
-              <Text style={{ fontSize: 14 }}> PROCESSING </Text>
+            <View style={styles.navButtons}>
+              <View>
+                <TouchableOpacity
+                  onPress={this.retry.bind(this)}
+                  style={styles.capture}
+                >
+                  <Text style={{ fontSize: 14 }}> RETRY </Text>
+                </TouchableOpacity>
+              <View>
+              </View>
+                <TouchableOpacity
+                  onPress={this.upload.bind(this)}
+                  style={styles.capture}
+                >
+                  <Text style={{ fontSize: 14 }}> DONE </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           );
         }
@@ -60,32 +75,43 @@ export default class Camera extends Component {
     );
   }
 
-takePicture = async function(camera) {
-  if (this.camera) {
-    const options = { quality: 0.5, base64: true };
-    const data = await this.camera.takePictureAsync(options);
-    console.log(data.uri);
-    console.log('hi');
-  }
-};
+// takePicture = async function(camera) {
+//   if (this.camera) {
+//     const options = { quality: 0.5, base64: true };
+//     const data = await this.camera.takePictureAsync(options);
+//     console.log(data.uri);
+//     console.log('hi');
+//   }
+// };
 
 
 
   async startRecording() {
       this.setState({ recording: true });
-      console.log('recording');
+      console.log('recording..');
 
       // default to mp4 for android as codec is not set
       const { uri, codec = "mp4" } = await this.camera.recordAsync();
+
       this.setState({ recording: false, processing: true });
-      console.log('done');
 
   }
 
   stopRecording() {
-    console.log('stopping');
+    console.log('stop.');
 
       this.camera.stopRecording();
+      console.log('processing video...');
+  }
+
+  retry() {
+    console.log('retry');
+    this.setState({ recording: false, processing: false });
+
+  }
+  upload() {
+    console.log('uploading video');
+
   }
 }
 
