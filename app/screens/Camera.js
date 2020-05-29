@@ -91,7 +91,7 @@ export default class Camera extends Component {
       console.log('recording..');
 
       // default to mp4 for android as codec is not set
-      const { uri, codec = "mp4" } = await this.camera.recordAsync();
+      const { uri, codec = 'mp4' } = await this.camera.recordAsync();
 
       this.setState({ recording: false, processing: true });
 
