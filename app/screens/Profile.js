@@ -28,7 +28,6 @@ const stats = [
     },
 ];
 
-
 function Profile({ navigation }) {
   return (
     <View style = {styles.container}>
