@@ -13,6 +13,7 @@ import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Challenge from './screens/Challenge';
 import Camera from './screens/Camera';
+import Receive from './screens/Receive';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,10 @@ function NavStack() {
       <Stack.Screen
         name="Camera"
         component={Camera}
+      />
+      <Stack.Screen
+        name="Receive"
+        component={Receive}
       />
     </Stack.Navigator>
   );
