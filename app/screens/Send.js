@@ -113,7 +113,7 @@ export default class Send extends Component {
 		super(props);
 		this.state = {
 			loading: false,
-			dataSource: users
+			dataSource: users // change to empty when use fetch
 		};
 	}
 
@@ -147,8 +147,8 @@ export default class Send extends Component {
 
 	selectItem = data => {
 		data.item.isSelect = !data.item.isSelect;
-		data.item.selectedClass = data.item.isSelect?
-									custom_styles.selected: custom_styles.list;
+		data.item.selectedClass = data.item.isSelect ?
+									custom_styles.selected : custom_styles.list;
 		const index = this.state.dataSource.findIndex(
 			item => data.item.id === item.id
 		);
@@ -158,7 +158,7 @@ export default class Send extends Component {
 		});
 		};
 
-	goToStore = () =>
+	send = () =>
 		this.props.navigation.navigate(
 			'Home' //, {selected: this.state.selected,}
 		);
@@ -204,7 +204,7 @@ render() {
 							type="font-awesome"
 							color="#5eb2f7" 
 							size={30} 
-							onPress={() => this.goToStore()}
+							onPress={() => this.send()}
 							containerStyle={{ backgroundColor: "#FA7B5F" }}
 						/>
 					</View>
