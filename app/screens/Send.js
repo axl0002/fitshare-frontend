@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from "react-native";
 import { Icon } from "react-native-elements";
 
+import styles from './../css/Styles';
+
+// isSelect and selectedClass will be added automatically
 const users = [
   {
 		id: 1,
@@ -14,7 +17,7 @@ const users = [
 			paddingVertical: 5,
 			margin: 3,
 			flexDirection: "row",
-			backgroundColor: "#192338",
+			backgroundColor: "#fff",
 			justifyContent: "flex-start",
 			alignItems: "center",
 			zIndex: -1
@@ -29,7 +32,7 @@ const users = [
 			paddingVertical: 5,
 			margin: 3,
 			flexDirection: "row",
-			backgroundColor: "#192338",
+			backgroundColor: "#fff",
 			justifyContent: "flex-start",
 			alignItems: "center",
 			zIndex: -1
@@ -44,7 +47,7 @@ const users = [
 			paddingVertical: 5,
 			margin: 3,
 			flexDirection: "row",
-			backgroundColor: "#192338",
+			backgroundColor: "#fff",
 			justifyContent: "flex-start",
 			alignItems: "center",
 			zIndex: -1
@@ -54,13 +57,7 @@ const users = [
 
 //TODO: fix styles
 const custom_styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#192338",
-		paddingVertical: 50,
-		position: "relative"
-	 },
-	 title: {
+	 name: {
 		fontSize: 20,
 		color: "#fff",
 		textAlign: "center",
@@ -76,21 +73,16 @@ const custom_styles = StyleSheet.create({
 		paddingVertical: 5,
 		margin: 3,
 		flexDirection: "row",
-		backgroundColor: "#192338",
+		backgroundColor: "#fff",
 		justifyContent: "flex-start",
 		alignItems: "center",
 		zIndex: -1
 	},
 	lightText: {
-		color: "#f7f7f7",
+		color: "#000",
 		width: 200,
 		paddingLeft: 15,
 		fontSize: 12
-	 },
-	 line: {
-		height: 0.5,
-		width: "100%",
-		backgroundColor:"rgba(255,255,255,0.5)"
 	},
 	icon: {
 		position: "absolute",  
@@ -112,7 +104,7 @@ const custom_styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	number: {fontSize: 14,color: "#000"},
-	selected: {backgroundColor: "#FA7B5F"},
+	selected: {backgroundColor: "#628072"},
 });
 
 export default class Send extends Component {
@@ -153,7 +145,6 @@ export default class Send extends Component {
 	// 	});
 	// };
 
-	FlatListItemSeparator = () => <View style={custom_styles.line} />;
 	selectItem = data => {
 		data.item.isSelect = !data.item.isSelect;
 		data.item.selectedClass = data.item.isSelect?
@@ -188,18 +179,19 @@ render() {
 	if (this.state.loading) {
 		return (
 			<View style={custom_styles.loader}>
-			<ActivityIndicator size="large" color="purple" />
+				<ActivityIndicator size="large" color="black" />
 			</View>
 		);
 	}
 		return (
-			<View style={custom_styles.container}>
+			<View style={styles.container}>
 				<FlatList
 					data={this.state.dataSource}
 				ItemSeparatorComponent={this.FlatListItemSeparator}
 				renderItem={item => this.renderItem(item)}
 				keyExtractor={item => item.id.toString()}
 				extraData={this.state}
+				bottomDivider
 				/>
 				<View style={custom_styles.numberBox}>
 				<Text style={custom_styles.number}>{itemNumber}</Text>
@@ -210,7 +202,7 @@ render() {
 							raised
 							name="send"
 							type="font-awesome"
-							color="#e3e3e3" 
+							color="#5eb2f7" 
 							size={30} 
 							onPress={() => this.goToStore()}
 							containerStyle={{ backgroundColor: "#FA7B5F" }}
