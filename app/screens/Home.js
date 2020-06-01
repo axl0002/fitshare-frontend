@@ -33,25 +33,7 @@ export default class Home extends Component {
         loop={false}
         showsPagination={false}
         index={1}
-        showsButtons={true}
-        // buttonWrapperStyle={styles.navButtons}
-        // prevButton={
-        //     <Icon
-        //       reverse
-        //       className="profile-button"
-        //       name="person"
-        //       size={30}
-        //     />
-        //   }
-        // nextButton={
-        //   <Icon
-        //     reverse
-        //     className="camera-button"
-        //     name="camera-alt"
-        //     size={30}
-        //   />
-        // }
-        >
+        showsButtons={true}>
 
         <View style = {styles.container}>
           <Profile/>
