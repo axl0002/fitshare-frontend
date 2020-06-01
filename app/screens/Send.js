@@ -1,10 +1,9 @@
-// This is a send screen
-
 import React, { Component } from 'react';
-import { StyleSheet, View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from "react-native";
-import { Icon } from "react-native-elements";
+import { View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 import styles from './../css/Styles';
+import sendStyles from './../css/SendScreenStyles';
 
 // isSelect and selectedClass will be added automatically
 
@@ -20,11 +19,11 @@ const groups = [
     selectedClass: {
       paddingVertical: 5,
       margin: 3,
-      flexDirection: "row",
-      backgroundColor: "#fff",
-      justifyContent: "flex-start",
-      alignItems: "center",
-      zIndex: -1
+      flexDirection: 'row',
+      backgroundColor: '#fff',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      zIndex: -1,
     },
   },
 ];
@@ -42,11 +41,11 @@ const friends = [
       selectedClass: {
         paddingVertical: 5,
         margin: 3,
-        flexDirection: "row",
-        backgroundColor: "#fff",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        zIndex: -1
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        zIndex: -1,
       },
   },
   {
@@ -61,11 +60,11 @@ const friends = [
       selectedClass: {
         paddingVertical: 5,
         margin: 3,
-        flexDirection: "row",
-        backgroundColor: "#fff",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        zIndex: -1
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        zIndex: -1,
       },
   },
   {
@@ -80,11 +79,11 @@ const friends = [
       selectedClass: {
         paddingVertical: 5,
         margin: 3,
-        flexDirection: "row",
-        backgroundColor: "#fff",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        zIndex: -1
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        zIndex: -1,
       },
   },
   ];
@@ -95,13 +94,12 @@ export default class Send extends Component {
     super(props);
     this.state = {
       loading: false,
-      // change these to empty when use fetch
+      // TODO: change these to empty when use fetch
       groups: groups,
-      friends: friends
+      friends: friends,
     };
   }
 
-  // /// loading the data
   // componentDidMount() {
   // 	this.fetchData();
   // }
@@ -112,13 +110,13 @@ export default class Send extends Component {
   // 		recentUsers: users,
   // 	});
   // 	this.setState({loading: true});
-  // 	fetch("url here")
+  // 	fetch('url here')
   // 	.then(response => response.json())
   // 	.then(
   // 		responseJson => {
   // 		responseJson = users.map(item => {
   // 			item.isSelect = false;
-  // 			item.selectedClass = custom_styles.list;
+  // 			item.selectedClass = sendStyles.list;
   // 		return item;
   // 	});
   // 	this.setState({
@@ -132,7 +130,7 @@ export default class Send extends Component {
   selectGroup = data => {
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect ?
-                  custom_styles.selected : custom_styles.list;
+                  sendStyles.selected : sendStyles.list;
     const index = this.state.groups.findIndex(
       item => data.item.id === item.id
     );
@@ -145,7 +143,7 @@ export default class Send extends Component {
   selectFriend = data => {
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect ?
-                  custom_styles.selected : custom_styles.list;
+                  sendStyles.selected : sendStyles.list;
     const index = this.state.friends.findIndex(
       item => data.item.id === item.id
     );
@@ -155,53 +153,50 @@ export default class Send extends Component {
     });
     };
 
-  // send function that navigate to Home screen
   send() {
-    console.log(this.state.friends)
-    console.log(this.state.groups)
     this.props.navigation.navigate(
-      'Home', 
+      'Home',
       {
-        toFriends: this.state.friends.filter(f => f.isSelect), 
-        toGroups: this.state.groups.filter(g => g.isSelect)
-      }
+        toFriends: this.state.friends.filter(f => f.isSelect),
+        toGroups: this.state.groups.filter(g => g.isSelect),
+      },
     );
-  } 
+  }
 
   renderRecent = data =>
     <TouchableOpacity
-      style={[custom_styles.list, data.item.selectedClass]}      
+      style={[sendStyles.list, data.item.selectedClass]}
       onPress={() => this.selectRecent(data)}
     >
       <Image
         source={{ uri: data.item.avatar }}
         style={{ width: 40, height: 40, margin: 6 }}
       />
-      <Text style={custom_styles.lightText}>  {data.item.name}  </Text>
+      <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
     </TouchableOpacity>
 
   renderGroup = data =>
     <TouchableOpacity
-      style={[custom_styles.list, data.item.selectedClass]}      
+      style={[sendStyles.list, data.item.selectedClass]}      
       onPress={() => this.selectGroup(data)}
     >
       <Image
         source={{ uri: data.item.avatar }}
         style={{ width: 40, height: 40, margin: 6 }}
       />
-      <Text style={custom_styles.lightText}>  {data.item.name}  </Text>
+      <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
     </TouchableOpacity>
 
   renderFriend = data =>
     <TouchableOpacity
-      style={[custom_styles.list, data.item.selectedClass]}      
+      style={[sendStyles.list, data.item.selectedClass]}      
       onPress={() => this.selectFriend(data)}
     >
       <Image
         source={{ uri: data.item.avatar }}
         style={{ width: 40, height: 40, margin: 6 }}
       />
-      <Text style={custom_styles.lightText}>  {data.item.name}  </Text>
+      <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
     </TouchableOpacity>
 
   render() {
@@ -209,8 +204,8 @@ export default class Send extends Component {
     + this.state.groups.filter(item => item.isSelect).length;
     if (this.state.loading) {
       return (
-        <View style={custom_styles.loader}>
-          <ActivityIndicator size="large" color="black" />
+        <View style={sendStyles.loader}>
+          <ActivityIndicator size='large' color='black' />
         </View>
       );
     }
@@ -252,19 +247,19 @@ export default class Send extends Component {
           extraData={this.state}
           bottomDivider
         />
-        <View style={custom_styles.numberBox}>
-          <Text style={custom_styles.number}>{itemNumber}</Text>
+        <View style={sendStyles.numberBox}>
+          <Text style={sendStyles.number}>{itemNumber}</Text>
         </View>
-        <TouchableOpacity style={custom_styles.icon}>
+        <TouchableOpacity style={ sendStyles.icon }>
           <View>
             <Icon
               raised
-              name="send"
-              type="font-awesome"
-              color="#5eb2f7" 
-              size={30} 
+              name='send'
+              type='font-awesome'
+              color='#5eb2f7'
+              size={30}
               onPress={() => this.send()}
-              containerStyle={{ backgroundColor: "#FA7B5F" }}
+              containerStyle={{ backgroundColor: '#FA7B5F' }}
             />
           </View>
         </TouchableOpacity>
@@ -272,56 +267,4 @@ export default class Send extends Component {
     );
   }
 
-} //Send
-
-//TODO: fix styles
-const custom_styles = StyleSheet.create({
-  name: {
-     fontSize: 20,
-     color: "#fff",
-     textAlign: "center",
-     marginBottom: 10
-   },
-   loader: {
-     flex: 1, 
-     justifyContent: "center",
-     alignItems: "center",
-     backgroundColor: "#fff"
-   },
-   list: {
-     paddingVertical: 5,
-     margin: 3,
-     flexDirection: "row",
-     backgroundColor: "#fff",
-     justifyContent: "flex-start",
-     alignItems: "center",
-     zIndex: -1
-   },
-   lightText: {
-     color: "#000",
-     width: 200,
-     paddingLeft: 15,
-     fontSize: 12
-   },
-   icon: {
-     position: "absolute",  
-     bottom: 20,
-     width: "100%", 
-     left: 290, 
-     zIndex: 1
-   },
-   numberBox: {
-     position: "absolute",
-     bottom: 75,
-     width: 30,
-     height: 30,
-     borderRadius: 15,  
-     left: 330,
-     zIndex: 3,
-     backgroundColor: "#e3e3e3",
-     justifyContent: "center",
-     alignItems: "center"
-   },
-   number: {fontSize: 14,color: "#000"},
-   selected: {backgroundColor: "#628072"},
-});
+}
