@@ -156,10 +156,17 @@ export default class Send extends Component {
     };
 
   // send function that navigate to Home screen
-  send = () =>
+  send() {
+    console.log(this.state.friends)
+    console.log(this.state.groups)
     this.props.navigation.navigate(
-      'Home' //, {selected: this.state.selected,}
+      'Home', 
+      {
+        toFriends: this.state.friends.filter(f => f.isSelect), 
+        toGroups: this.state.groups.filter(g => g.isSelect)
+      }
     );
+  } 
 
   renderRecent = data =>
     <TouchableOpacity
