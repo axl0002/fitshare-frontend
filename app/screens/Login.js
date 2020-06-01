@@ -12,7 +12,7 @@ class Login extends Component {
       try {
         await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
-        this.setState({ userInfo });
+        this.props.setUserData(userInfo);
       } catch (error) {
         // leaving this here to add a loading spinner in the future (maybe)
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {

@@ -52,6 +52,10 @@ class App extends Component {
     };
   }
 
+  setUserData (data) {
+    this.setState({ data });
+  }
+
   componentDidMount() {
     GoogleSignin.isSignedIn().then(
       (ret) => {
@@ -61,7 +65,7 @@ class App extends Component {
 
   render() {
     if (!this.state.isSignedIn) {
-      return <Login />;
+      return <Login setUserData={this.setUserData} />;
     } else {
       return (NavStack());
     }
