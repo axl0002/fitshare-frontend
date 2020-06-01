@@ -27,7 +27,18 @@ const users = [
 ];
 
 export default class Home extends Component {
+  state = {
+    search: '',
+  }
+
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
+
   render() {
+    const { search } = this.state;
+
     return (
       <Swiper
         loop={false}
@@ -40,7 +51,11 @@ export default class Home extends Component {
         </View>
 
         <View style = {styles.container}>
-          <SearchBar placeholder="Type Here..." />
+          <SearchBar
+          placeholder="Search Friends..."
+          onChangeText={this.updateSearch}
+          value={search}
+          />
           {users.map((l, i) => (
             <ListItem
               key={i}

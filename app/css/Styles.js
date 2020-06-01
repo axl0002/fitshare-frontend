@@ -1,5 +1,14 @@
 import {StyleSheet} from 'react-native';
 
+function padding(a, b, c, d) {
+  return {
+    paddingTop: a,
+    paddingRight: b ? b : a,
+    paddingBottom: c ? c : a,
+    paddingLeft: d ? d : (b ? b : a)
+  }
+}
+
 export default StyleSheet.create({
   statusText: {
     color: 'red',
@@ -23,5 +32,16 @@ export default StyleSheet.create({
   centerObject: {
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
   },
+  profileAvatar: {
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  profileText: {
+    fontFamily: 'Segoe UI',
+    fontSize: 25,
+    fontWeight: 'normal',
+    lineHeight: 25,
+  }
 });

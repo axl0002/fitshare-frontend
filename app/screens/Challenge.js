@@ -7,12 +7,26 @@ import { SearchBar, ListItem, Icon, Button, Input } from 'react-native-elements'
 import styles from './../css/Styles';
 
 class Challenge extends Component {
+
+  state = {
+    search: '',
+  }
+
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
   render() {
     const {navigation} = this.props;
+    const { search } = this.state;
 
     return (
       <View style = {styles.container}>
-        <SearchBar placeholder="Type Here..." />
+        <SearchBar
+        placeholder="Type Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+        />
         <Text style={{ fontSize: 40 }}>Challenge Screen</Text>
 
         <Text>Name of Exercise</Text>
