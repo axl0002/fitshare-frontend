@@ -10,10 +10,8 @@ class Login extends Component {
   render() {
     var onPress = async () => {
       try {
-        console.log('hi');
         await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
-        console.log(userInfo);
         this.setState({ userInfo });
       } catch (error) {
         // leaving this here to add a loading spinner in the future (maybe)

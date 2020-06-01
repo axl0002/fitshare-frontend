@@ -55,7 +55,6 @@ class App extends Component {
   componentDidMount() {
     GoogleSignin.isSignedIn().then(
       (ret) => {
-        console.log(ret);
         this.setState({isSignedIn: ret});
     });
   }
