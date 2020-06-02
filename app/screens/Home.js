@@ -26,55 +26,52 @@ const users = [
   },
 ];
 
+export default class Home extends Component {
+  state = {
+    search: '',
+  }
 
-function Home({ navigation }) {
-  return (
-    <Swiper
-      loop={false}
-      showsPagination={false}
-      index={1}
-      showsButtons={true}
-      buttonWrapperStyle={styles.navButtons}
-      prevButton={
-          <Icon
-            reverse
-            className="profile-button"
-            name="person"
-            size={15}
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
+
+  render() {
+    const { search } = this.state;
+
+    return (
+      <Swiper
+        loop={false}
+        showsPagination={false}
+        index={1}
+        showsButtons={true}>
+
+        <View style = {styles.container}>
+          <Profile/>
+        </View>
+
+        <View style = {styles.container}>
+          <SearchBar
+          placeholder="Search Friends..."
+          onChangeText={this.updateSearch}
+          value={search}
           />
-        }
-      nextButton={
-        <Icon
-          reverse
-          className="camera-button"
-          name="camera-alt"
-          size={15}
-        />
-      }>
+          {users.map((l, i) => (
+            <ListItem
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              bottomDivider
+            />
+          ))}
+        </View>
 
-      <View style = {styles.container}>
-        <Profile/>
-      </View>
+        <View style = {styles.container}>
+          <Challenge/>
+        </View>
 
-      <View style = {styles.container}>
-        <SearchBar placeholder="Type Here..." />
-        {users.map((l, i) => (
-          <ListItem
-            key={i}
-            leftAvatar={{ source: { uri: l.avatar } }}
-            title={l.name}
-            subtitle={l.subtitle}
-            bottomDivider
-          />
-        ))}
-      </View>
-
-      <View style = {styles.container}>
-        <Challenge navigation={navigation}/>
-      </View>
-
-    </Swiper>
-  );
+      </Swiper>
+    );
+  }
 }
-
-export default Home;

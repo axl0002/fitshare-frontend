@@ -28,34 +28,52 @@ const stats = [
     },
 ];
 
-function Profile({ navigation }) {
-  return (
-    <View style = {styles.container}>
-      <SearchBar placeholder="Type Here..." />
-      <Text style={{ fontSize: 40 }}>Profile Screen</Text>
+export default class Profile extends Component {
+  state = {
+    search: '',
+  }
 
-      <Avatar
-        rounded
-        source={{
-          uri:'https://media-exp1.licdn.com/dms/image/C5603AQFEn0wblZFgZw/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=_YzQoX17JaNACtagQDpJMiD0ZeTs4zXYnTdF9MfUh4A',
-        }}
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
+
+  render() {
+    const { search } = this.state;
+
+    return (
+      <View style = {styles.container}>
+        <SearchBar
+        placeholder="Search Friends..."
+        onChangeText={this.updateSearch}
+        value={search}
         />
-        <View>
-          <Text>
-            Alex Liu
-          </Text>
-        </View>
-      {stats.map((l, i) => (
-        <ListItem
-          key={i}
-          leftAvatar={{ source: { uri: l.icon } }}
-          title={l.name}
-          subtitle={l.value}
-          bottomDivider
-        />
-      ))}
-    </View>
-  );
+        <View style = {styles.centerObject}>
+          <View style = {styles.profileAvatar}>
+            <Avatar
+              rounded
+              size="xlarge"
+              source={{
+                uri:'https://media-exp1.licdn.com/dms/image/C5603AQFEn0wblZFgZw/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=_YzQoX17JaNACtagQDpJMiD0ZeTs4zXYnTdF9MfUh4A',
+              }}
+              />
+            </View>
+            <View style={{margin:20}}>
+              <Text style={styles.profileText}>
+                Alex Liu
+              </Text>
+            </View>
+          </View>
+        {stats.map((l, i) => (
+          <ListItem
+            key={i}
+            leftAvatar={{ source: { uri: l.icon } }}
+            title={l.name}
+            subtitle={l.value}
+            bottomDivider
+          />
+        ))}
+      </View>
+    );
+  }
 }
-
-export default Profile;

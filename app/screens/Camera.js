@@ -111,7 +111,7 @@ export default class Camera extends Component {
   }
   upload() {
     console.log('uploading video');
-
+    this.props.navigation.navigate('Send')
   }
 }
 
