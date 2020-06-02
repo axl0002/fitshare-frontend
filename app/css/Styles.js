@@ -12,7 +12,7 @@ function padding(a, b, c, d) {
 export default StyleSheet.create({
   statusText: {
     color: 'red',
-    fontFamily: 'Segoe UI',
+    //fontFamily: 'Segoe UI',
     fontSize: 14,
     fontWeight: 'normal',
     lineHeight: 19,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   profileText: {
-    fontFamily: 'Segoe UI',
+    //fontFamily: 'Segoe UI',
     fontSize: 25,
     fontWeight: 'normal',
     lineHeight: 25,
