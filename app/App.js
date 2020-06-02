@@ -52,14 +52,16 @@ class App extends Component {
     };
   }
 
-  setUserData (data) {
+  setUserData = async (data) => {
     this.setState({ data });
 
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = () => {console.log(xhr.status);};
-    xhr.open('POST', 'https://fitshare-backend.herokuapp.com/users');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringfy(data));
+    fetch('https://fitshare-backend.herokuapp.com/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   }
 
   componentDidMount() {
@@ -73,7 +75,6 @@ class App extends Component {
     if (!this.state.isSignedIn) {
       return <Login setUserData={this.setUserData} />;
     } else {
-      GoogleSignin.signOut();
       return (NavStack());
     }
   }
