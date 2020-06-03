@@ -89,7 +89,7 @@ export default class Home extends Component {
                   source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg' }}
                   style={{ width: 40, height: 40, margin: 6 }}
                 />
-                <Text>  {item.item}  </Text>
+                <Text>  {item.item.name}  </Text>
               </TouchableOpacity>
             )}
             keyExtractor={(item, index) => index.toString()}
