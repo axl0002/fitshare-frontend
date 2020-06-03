@@ -16,13 +16,14 @@ import Camera from './screens/Camera';
 import Login from './screens/Login';
 import Receive from './screens/Receive';
 import Send from './screens/Send';
+import UserContext from './context/UserContext';
 
 const Stack = createStackNavigator();
 
-function NavStack() {
-  return (
+class NavStack extends Component {
+  render() {
+    return (
      <NavigationContainer>
-
      <Stack.Navigator
       screenOptions={{ headerShown: false }}>
       <Stack.Screen
@@ -49,9 +50,10 @@ function NavStack() {
         name="Send"
         component={Send}
       />
-    </Stack.Navigator>
-    </NavigationContainer>
-  );
+     </Stack.Navigator>
+     </NavigationContainer>
+    );
+  }
 }
 
 class App extends Component {
@@ -77,7 +79,10 @@ class App extends Component {
   componentDidMount() {
     GoogleSignin.isSignedIn().then(
       (ret) => {
-        this.setState({isSignedIn: ret});
+        GoogleSignin.signInSilently().then((data) => {
+          this.setState({ data });
+          this.setState({ isSignedIn: ret });
+        });
     });
   }
 
@@ -85,7 +90,11 @@ class App extends Component {
     if (!this.state.isSignedIn) {
       return <Login setUserData={this.setUserData} />;
     } else {
-      return (NavStack());
+      return (
+        <UserContext.Provider value={this.state.data.user}>
+          <NavStack />
+        </UserContext.Provider>
+      );
     }
   }
 }
