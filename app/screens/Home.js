@@ -8,6 +8,8 @@ import { SearchBar, ListItem, Icon, Button} from 'react-native-elements';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import styles from './../css/Styles';
 
+import UserContext from '../context/UserContext';
+
 
 const users = [
   {
@@ -28,6 +30,7 @@ const users = [
 ];
 
 export default class Home extends Component {
+  static contextType = UserContext;
   _isMounted = false;
   constructor(props) {
     super(props);
