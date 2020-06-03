@@ -37,55 +37,25 @@ export default class Home extends Component {
     this.state = {
       friends: null,
       search: '',
-      userid: null,
-      data: null,
     };
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    this.load();
-
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  async load() {
-    await this.getCurrentUserInfo();
-    await this.getFriends();
-
+    this.getFriends();
   }
 
   async getFriends() {
-      try {
-        let response = await fetch(
-          'https://fitshare-backend.herokuapp.com/friends/'.concat(this.state.userid)
-        );
-        let json = await response.json();
+    await fetch(
+      'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
+    ).then((response) => response.json())
+     .then((json) => {
         this.setState({friends: json});
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    async getCurrentUserInfo() {
-        try {
-            let currentUser = await GoogleSignin.getCurrentUser();
-            this.setState({ data: currentUser });
-            let id = currentUser['user']['id'];
-            this.setState({ userid: id });
-          } catch (error) {
-            console.error(error);
-
-          }
-    }
+    });
+  }
 
   updateSearch = search => {
     this.setState({ search });
   };
-
 
   render() {
     const { search } = this.state;
