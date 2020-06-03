@@ -4,11 +4,14 @@ import { Icon } from 'react-native-elements';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import RNFetchBlob from 'react-native-fetch-blob';
 
+import UserContext from '../context/UserContext';
+
 import styles from './../css/Styles';
 import sendStyles from './../css/SendScreenStyles';
 
 export default class Send extends Component {
 
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +20,6 @@ export default class Send extends Component {
       exercise: this.props.route.params.exercise,
       description: this.props.route.params.description,
       uri: this.props.route.params.uri, 
-      userid: null,
     };
   }
 
@@ -44,9 +46,9 @@ export default class Send extends Component {
     }, [
     { name : "file", filename : "file.mp4", data: RNFetchBlob.wrap(this.state.uri)},
     { name : "json", data : JSON.stringify({
-      user_id : this.state.userid,
+      user_id : this.context.id,
       targets_ids: targetIds,
-      metadata: this.state.exercise.concat(this.state.description)
+      metadata: "Exercise: ".concat(this.state.exercise).concat(", Description: ".concat(this.state.description))
     })},
     ]).then((resp) => {
       // ...
@@ -58,7 +60,7 @@ export default class Send extends Component {
   async getFriends() {
     try {
       let response = await fetch(
-        'https://fitshare-backend.herokuapp.com/friends/'.concat(this.state.userid)
+        'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
       );
       let json = await response.json();
       let mapped = json.map(item => {
