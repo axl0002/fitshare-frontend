@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { GoogleSignin } from '@react-native-community/google-signin';
 import RNFetchBlob from 'react-native-fetch-blob';
 
 import UserContext from '../context/UserContext';
@@ -70,17 +69,6 @@ export default class Send extends Component {
             return item;
           });
       this.setState({friends: mapped});
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async getCurrentUserInfo() {
-    try {
-      let currentUser = await GoogleSignin.getCurrentUser();
-      this.setState({ data: currentUser });
-      let id = currentUser['user']['id'];
-      this.setState({ userid: id });
     } catch (error) {
       console.error(error);
     }
