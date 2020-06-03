@@ -5,6 +5,7 @@ import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar, ListItem, Icon, Button} from 'react-native-elements';
 
+import { GoogleSignin } from '@react-native-community/google-signin';
 import styles from './../css/Styles';
 
 
@@ -33,17 +34,25 @@ export default class Home extends Component {
     this.state = {
       friends: null,
       search: '',
-      userid: '106063041617179551857',
+      userid: null,
+      data: null,
     };
   }
 
   componentDidMount() {
     this._isMounted = true;
-  	this.getFriends();
+    this.load();
+
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  async load() {
+    await this.getCurrentUserInfo();
+    await this.getFriends();
+
   }
 
   async getFriends() {
@@ -52,13 +61,25 @@ export default class Home extends Component {
           'https://fitshare-backend.herokuapp.com/friends/'.concat(this.state.userid)
         );
         let json = await response.json();
-        console.log(json);
+        // console.log(json);
         // console.log(json[0]);
         // console.log(json[1]);
         this.setState({friends: json});
       } catch (error) {
         console.error(error);
       }
+    }
+
+    async getCurrentUserInfo() {
+        try {
+            let currentUser = await GoogleSignin.getCurrentUser();
+            this.setState({ data: currentUser });
+            let id = currentUser['user']['id'];
+            this.setState({ userid: id });
+          } catch (error) {
+            console.error(error);
+
+          }
     }
 
   updateSearch = search => {
@@ -68,6 +89,8 @@ export default class Home extends Component {
 
   render() {
     const { search } = this.state;
+    // console.log(this.state.id);
+
 
     return (
       <Swiper
@@ -98,7 +121,10 @@ export default class Home extends Component {
                 <Text>  {item.item}  </Text>
               </TouchableOpacity>
             )}
+            keyExtractor={(item, index) => index.toString()}
+            bottomDivider
           />
+
         </View>
 
         <View style = {styles.container}>
