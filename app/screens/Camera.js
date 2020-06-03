@@ -9,13 +9,19 @@ import styles from './../css/Styles';
 // var processing = false;
 
 export default class Camera extends Component {
-  
-  state = {
-    recording: false,
-    processing: false,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      recording: false,
+      processing: false,
+      description: this.props.route.params.description,
+      exercise: this.props.route.params.exercise,
+    };
   }
 
   render() {
+    console.log(this.state.exercise);
       const { recording, processing } = this.state
 
           let button = (

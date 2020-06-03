@@ -8,8 +8,13 @@ import styles from './../css/Styles';
 
 class Challenge extends Component {
 
-  state = {
-    search: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+      exercise: null,
+      description: null,
+    };
   }
 
   updateSearch = search => {
@@ -19,7 +24,6 @@ class Challenge extends Component {
   render() {
     const { navigation } = this.props;
     const { search } = this.state;
-
     return (
       <View style = {styles.container}>
       <SearchBar
@@ -34,13 +38,18 @@ class Challenge extends Component {
           <View style = {styles.centerObject}>
             <Text style={styles.challengeFormText}>Name of Exercise</Text>
           </View>
-          <Input placeholder='Exercise'/>
+          <Input placeholder='Exercise'
+          onChangeText={e => this.setState({ exercise: e })}
+          />
         </View>
         <View style={{marginVertical:20}}>
           <View style = {styles.centerObject}>
             <Text style={styles.challengeFormText}>Distance/ Sets and Reps/ Time</Text>
           </View>
-          <Input placeholder='Description'/>
+          <Input 
+          placeholder='Description'
+          onChangeText={d => this.setState({ description: d })}
+          />
         </View>
         <View style={styles.bottom}>
           <View style={styles.navButtons}>
@@ -99,7 +108,12 @@ class Challenge extends Component {
               className="camera-button"
               name="camera-alt"
               size={40}
-              onPress={() => navigation.navigate('Camera')}
+              onPress={() => navigation.navigate('Camera',
+                {
+                  exercise: this.state.exercise,
+                  description: this.state.description,
+                }
+              )}
             />
           }
           />
