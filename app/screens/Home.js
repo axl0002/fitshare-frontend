@@ -10,24 +10,6 @@ import styles from './../css/Styles';
 import UserContext from '../context/UserContext';
 
 
-const users = [
-  {
-    name: 'Jack Jones',
-    subtitle: 'New challenge!',
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
-  },
-  {
-    name: 'Jackson John',
-    subtitle: 'Challenge accepted!',
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
-  },
-  {
-    name: 'Jacklynn Jamerson',
-    subtitle: 'Challenge sent!',
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
-  },
-];
-
 export default class Home extends Component {
   static contextType = UserContext;
   _isMounted = false;
@@ -60,7 +42,7 @@ export default class Home extends Component {
   <View
     style={{
       backgroundColor: '#c7c7c7',
-      width: "100%",
+      width: '100%',
       height: 1,
     }}
   />
