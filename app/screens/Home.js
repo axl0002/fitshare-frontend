@@ -61,9 +61,6 @@ export default class Home extends Component {
           'https://fitshare-backend.herokuapp.com/friends/'.concat(this.state.userid)
         );
         let json = await response.json();
-        // console.log(json);
-        // console.log(json[0]);
-        // console.log(json[1]);
         this.setState({friends: json});
       } catch (error) {
         console.error(error);
@@ -89,8 +86,6 @@ export default class Home extends Component {
 
   render() {
     const { search } = this.state;
-    // console.log(this.state.id);
-
 
     return (
       <Swiper
