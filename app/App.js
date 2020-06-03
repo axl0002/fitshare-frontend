@@ -2,11 +2,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Component } from 'react';
-import { SafeAreaView, View } from 'react-native';
-import { SearchBar, ListItem, Icon, Button } from 'react-native-elements';
 import { GoogleSignin } from '@react-native-community/google-signin';
-
-import styles from './css/Styles';
 
 
 import Home from './screens/Home';
