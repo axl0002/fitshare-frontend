@@ -9,10 +9,16 @@ import styles from './../css/Styles';
 // var processing = false;
 
 export default class Camera extends Component {
-  
-  state = {
-    recording: false,
-    processing: false,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      recording: false,
+      processing: false,
+      description: this.props.route.params.description,
+      exercise: this.props.route.params.exercise,
+      uri: null,
+    };
   }
 
   render() {
@@ -93,9 +99,13 @@ export default class Camera extends Component {
 
       // default to mp4 for android as codec is not set
       const { uri, codec = 'mp4' } = await this.camera.recordAsync();
-
-      this.setState({ recording: false, processing: true });
-
+      this.setState(
+        { 
+          recording: false, 
+          processing: true,
+          uri: uri,
+        }
+      );
   }
 
   stopRecording() {
@@ -112,7 +122,13 @@ export default class Camera extends Component {
   }
   upload() {
     console.log('uploading video');
-    this.props.navigation.navigate('Send')
+    this.props.navigation.navigate('Send',
+    {
+      exercise: this.state.exercise,
+      description: this.state.description,
+      uri: this.state.uri,
+    }
+    )
   }
 }
 
