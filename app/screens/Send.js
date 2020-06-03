@@ -41,14 +41,14 @@ export default class Send extends Component {
   // TODO: check metadata for null
   async post() {
     let targetIds = this.state.friends.map(item => {return item.id});
-    RNFetchBlob.fetch("POST", "https://fitshare-backend.herokuapp.com/send", {
-      "Content-Type" : "multipart/form-data",
+    RNFetchBlob.fetch('POST', 'https://fitshare-backend.herokuapp.com/send', {
+      'Content-Type' : 'multipart/form-data',
     }, [
-    { name : "file", filename : "file.mp4", data: RNFetchBlob.wrap(this.state.uri)},
-    { name : "json", data : JSON.stringify({
+    { name : 'file', filename : 'file.mp4', data: RNFetchBlob.wrap(this.state.uri)},
+    { name : 'json', data : JSON.stringify({
       user_id : this.context.id,
       targets_ids: targetIds,
-      metadata: "Exercise: ".concat(this.state.exercise).concat(", Description: ".concat(this.state.description))
+      metadata: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description))
     })},
     ]).then((resp) => {
       // ...
@@ -104,7 +104,7 @@ export default class Send extends Component {
     };
 
   send() {
-    this.post()
+    this.post();
     this.props.navigation.navigate(
       'Home'
     );
