@@ -36,14 +36,16 @@ export default class Send extends Component {
     await this.getFriends();
   }
 
+  // TODO: check metadata for null
   async post() {
+    let targetIds = this.state.friends.map(item => {return item.id});
     RNFetchBlob.fetch("POST", "https://fitshare-backend.herokuapp.com/send", {
       "Content-Type" : "multipart/form-data",
     }, [
     { name : "file", filename : "file.mp4", data: RNFetchBlob.wrap(this.state.uri)},
     { name : "json", data : JSON.stringify({
-      user_id : "101574074440435265082",
-      targets_ids: ["106063041617179551857"],
+      user_id : this.state.userid,
+      targets_ids: targetIds,
       metadata: this.state.exercise.concat(this.state.description)
     })},
     ]).then((resp) => {
