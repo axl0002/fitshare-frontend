@@ -23,6 +23,9 @@ export default StyleSheet.create({
   backgroundColoring: {
     backgroundColor:'#f2fcfa',
   },
+  whiteBackgroundColoring: {
+    backgroundColor:'#FFFFFF',
+  },
   centerObject: {
     display: 'flex',
     justifyContent: 'center',
@@ -51,6 +54,8 @@ export default StyleSheet.create({
   },
   roundedCorners: {
     borderRadius:35,
+    marginLeft:35,
+    marginRight:35,
     overflow: 'hidden'
   },
   challengeButton: {

@@ -57,6 +57,16 @@ export default class Home extends Component {
     this.setState({ search });
   };
 
+  renderSeparator = () => (
+  <View
+    style={{
+      backgroundColor: '#c7c7c7',
+      width: "100%",
+      height: 1,
+    }}
+  />
+);
+
   render() {
     const { search } = this.state;
 
@@ -71,7 +81,7 @@ export default class Home extends Component {
           <Profile/>
         </View>
 
-        <View style = {[styles.backgroundColoring, styles.container]}>
+        <View style = {[styles.whiteBackgroundColoring, styles.container]}>
           <SearchBar
           lightTheme
           containerStyle={styles.searchBarContainer}
@@ -92,13 +102,14 @@ export default class Home extends Component {
                 <Text>  {item.item.name}  </Text>
               </TouchableOpacity>
             )}
+            ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
             bottomDivider
           />
 
         </View>
 
-        <View style = {[styles.backgroundColoring, styles.container]}>
+        <View style = {[styles.whiteBackgroundColoring, styles.container]}>
           <Challenge/>
         </View>
 
