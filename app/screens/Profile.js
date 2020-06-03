@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-
+import UserContext from '../context/UserContext';
 
 import { SearchBar, ListItem, Icon, Button, Avatar } from 'react-native-elements';
 
@@ -24,11 +24,13 @@ const stats = [
   },  {
       icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
       name: 'challenges completed',
-      value: '97%'
+      value: '97%',
     },
 ];
 
 export default class Profile extends Component {
+  static contextType = UserContext;
+
   state = {
     search: '',
   }
@@ -60,7 +62,7 @@ export default class Profile extends Component {
             </View>
             <View style={{margin:20}}>
               <Text style={styles.profileText}>
-                Alex Liu
+                {this.context.name}
               </Text>
             </View>
           </View>
