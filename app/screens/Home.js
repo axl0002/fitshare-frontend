@@ -5,7 +5,6 @@ import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar } from 'react-native-elements';
 
-import { GoogleSignin } from '@react-native-community/google-signin';
 import styles from './../css/Styles';
 
 import UserContext from '../context/UserContext';
