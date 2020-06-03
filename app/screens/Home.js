@@ -71,7 +71,7 @@ export default class Home extends Component {
           <Profile/>
         </View>
 
-        <View style = {[styles.backgroundColoring, styles.container]}>
+        <View style = {[styles.whiteBackgroundColoring, styles.container]}>
           <SearchBar
           lightTheme
           containerStyle={styles.searchBarContainer}
@@ -98,7 +98,7 @@ export default class Home extends Component {
 
         </View>
 
-        <View style = {[styles.backgroundColoring, styles.container]}>
+        <View style = {[styles.whiteBackgroundColoring, styles.container]}>
           <Challenge/>
         </View>
 
