@@ -23,13 +23,8 @@ export default class Send extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.load();
 
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   async load() {
