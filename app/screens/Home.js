@@ -71,7 +71,7 @@ export default class Home extends Component {
           onChangeText={this.updateSearch}
           value={search}
           />
-          <FlatList
+          {/* <FlatList
             ItemSeparatorComponent={this.FlatListItemSeparator}
             data={this.state.friends}
             renderItem={item => (
@@ -86,7 +86,7 @@ export default class Home extends Component {
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
             bottomDivider
-          />
+          /> */}
 
         </View>
 

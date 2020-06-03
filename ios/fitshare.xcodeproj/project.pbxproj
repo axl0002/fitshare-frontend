@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* fitshareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fitshareTests.m */; };
 		020A5A23E9EC11BB896A4B4C /* libPods-fitshare-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84250CED50608A9BD347AB12 /* libPods-fitshare-tvOS.a */; };
