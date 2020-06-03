@@ -9,11 +9,12 @@ import styles from './../css/Styles';
 // var processing = false;
 
 export default class Camera extends Component {
-
+  
   state = {
     recording: false,
     processing: false,
   }
+
   render() {
       const { recording, processing } = this.state
 

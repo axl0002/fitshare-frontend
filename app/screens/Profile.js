@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-
 import { SearchBar, ListItem, Icon, Button, Avatar } from 'react-native-elements';
 
 import styles from './../css/Styles';
@@ -43,11 +42,14 @@ export default class Profile extends Component {
 
     return (
       <View style = {styles.container}>
-        <SearchBar
-        placeholder="Search Friends..."
-        onChangeText={this.updateSearch}
-        value={search}
-        />
+      <SearchBar
+      lightTheme
+      containerStyle={styles.searchBarContainer}
+      inputContainerStyle={styles.searchBarInput}
+      placeholder="Search Friends..."
+      onChangeText={this.updateSearch}
+      value={search}
+      />
         <View style = {styles.centerObject}>
           <View style = {styles.profileAvatar}>
             <Avatar
@@ -64,15 +66,17 @@ export default class Profile extends Component {
               </Text>
             </View>
           </View>
-        {stats.map((l, i) => (
-          <ListItem
-            key={i}
-            leftAvatar={{ source: { uri: l.icon } }}
-            title={l.name}
-            subtitle={l.value}
-            bottomDivider
-          />
-        ))}
+          <View style={styles.roundedCorners}>
+            {stats.map((l, i) => (
+              <ListItem
+                key={i}
+                leftAvatar={{ source: { uri: l.icon } }}
+                title={l.name}
+                subtitle={l.value}
+                bottomDivider
+              />
+            ))}
+        </View>
       </View>
     );
   }

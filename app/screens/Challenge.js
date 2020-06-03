@@ -17,53 +17,93 @@ class Challenge extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     const { search } = this.state;
 
     return (
       <View style = {styles.container}>
-        <SearchBar
-        placeholder="Type Here..."
-        onChangeText={this.updateSearch}
-        value={search}
-        />
-        <Text style={{ fontSize: 40 }}>Challenge Screen</Text>
-
-        <Text>Name of Exercise</Text>
-        <Input placeholder='Exercise'/>
-        <Text>Distance/ Sets and Reps/ Time</Text>
-        <Input placeholder='Description'/>
-
-        <View style={styles.navButtons}>
-          <View>
-            <Button
-              title='Live'
-            />
+      <SearchBar
+      lightTheme
+      containerStyle={styles.searchBarContainer}
+      inputContainerStyle={styles.searchBarInput}
+      placeholder="Search Friends..."
+      onChangeText={this.updateSearch}
+      value={search}
+      />
+        <View style={{marginTop:50}}>
+          <View style = {styles.centerObject}>
+            <Text style={styles.challengeFormText}>Name of Exercise</Text>
           </View>
-          <View>
-            <Button
-              title='Streak'
-            />
-          </View>
-          <View>
-            <Button
-              title='Battle'
-            />
-          </View>
+          <Input placeholder='Exercise'/>
         </View>
+        <View style={{marginVertical:20}}>
+          <View style = {styles.centerObject}>
+            <Text style={styles.challengeFormText}>Distance/ Sets and Reps/ Time</Text>
+          </View>
+          <Input placeholder='Description'/>
+        </View>
+        <View style={styles.bottom}>
+          <View style={styles.navButtons}>
+            <View>
+              <Button
+                title='Live'
+                buttonStyle={styles.challengeButton}
+                icon = {
+                  <Icon
+                    iconStyle={styles.challengeIcons}
+                    className="material-icons"
+                    name="videocam"
+                    size={25}
+                  />
+                }
+                iconRight
+              />
+            </View>
+            <View>
+              <Button
+                title='Streak'
+                buttonStyle={styles.challengeButton}
+                icon = {
+                  <Icon
+                    iconStyle={styles.challengeIcons}
+                    className="material-icons"
+                    name="thumb-up"
+                    size={25}
+                  />
+                }
+                iconRight
+              />
+            </View>
+            <View>
+              <Button
+                title='Battle'
+                buttonStyle={styles.challengeButton}
+                icon = {
+                  <Icon
+                    iconStyle={styles.challengeIcons}
+                    className="material-icons"
+                    name="android"
+                    size={25}
+                  />
+                }
+                iconRight
+              />
+            </View>
+          </View>
 
-        <Button
-        icon = {
-          <Icon
-            reverse
-            className="camera-button"
-            name="camera-alt"
-            size={15}
-            onPress={() => navigation.navigate('Camera')}
+          <Button
+          type='clear'
+          icon = {
+            <Icon
+              reverse
+              className="camera-button"
+              name="camera-alt"
+              size={40}
+              onPress={() => navigation.navigate('Camera')}
+            />
+          }
           />
-        }
-        />
-
+        </View>
       </View>
     );
   }

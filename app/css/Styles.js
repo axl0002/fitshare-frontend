@@ -1,14 +1,5 @@
 import {StyleSheet} from 'react-native';
 
-function padding(a, b, c, d) {
-  return {
-    paddingTop: a,
-    paddingRight: b ? b : a,
-    paddingBottom: c ? c : a,
-    paddingLeft: d ? d : (b ? b : a)
-  }
-}
-
 export default StyleSheet.create({
   statusText: {
     color: 'red',
@@ -29,6 +20,9 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  backgroundColoring: {
+    backgroundColor:'#f2fcfa',
+  },
   centerObject: {
     display: 'flex',
     justifyContent: 'center',
@@ -43,5 +37,27 @@ export default StyleSheet.create({
     fontSize: 25,
     fontWeight: 'normal',
     lineHeight: 25,
-  }
+  },
+  challengeFormText: {
+    // fontFamily: "Segoe UI",
+    fontSize: 20,
+    fontWeight: 'normal',
+  },
+  searchBarContainer: {
+    backgroundColor: '#bfede2',
+  },
+  searchBarInput: {
+    backgroundColor: '#9ce3d1',
+  },
+  roundedCorners: {
+    borderRadius:35,
+    overflow: 'hidden'
+  },
+  challengeButton: {
+    backgroundColor:'#4fd8b6',
+    margin:15
+  },
+  challengeIcons: {
+    marginLeft: 6,
+  },
 });
