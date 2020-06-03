@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { GoogleSignin } from '@react-native-community/google-signin';
-import { RNFetchBlob } from 'react-native-fetch-blob';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 import styles from './../css/Styles';
 import sendStyles from './../css/SendScreenStyles';
