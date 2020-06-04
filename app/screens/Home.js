@@ -61,7 +61,7 @@ export default class Home extends Component {
       ).then(response => response.json())
        .then((json) => {
           let metadata = json.metadata;
-          let key = json.s3_key;
+          let key = json.key;
           this.props.navigation.navigate(
             'Receive',
             {
