@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, View, Text, Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import UserContext from '../context/UserContext';
 
 import { SearchBar, ListItem, Icon, Button, Avatar } from 'react-native-elements';
@@ -42,9 +43,18 @@ export default class Profile extends Component {
 
   render() {
     const { search } = this.state;
+    const line = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [
+        {
+          data: [20, 45, 28, 80, 99, 43],
+          strokeWidth: 2, // optional
+        },
+      ],
+    };
 
     return (
-      <View style = {styles.container}>
+      <ScrollView style = {styles.container}>
       <SearchBar
       lightTheme
       containerStyle={styles.searchBarContainer}
@@ -79,8 +89,26 @@ export default class Profile extends Component {
                 bottomDivider
               />
             ))}
+          </View>
+          <View>
+          <LineChart
+            data={line}
+            width={Dimensions.get('window').width}
+            height={220}
+            chartConfig={{
+              backgroundColor: '#e26a00',
+              backgroundGradientFrom: '#fb8c00',
+              backgroundGradientTo: '#ffa726',
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+            }}
+            bezier
+          />
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
