@@ -26,18 +26,38 @@ export default class Camera extends Component {
       const { recording, processing } = this.state
 
           let button = (
-          <TouchableOpacity
-          onPress={this.startRecording.bind(this)}
-          >
-          <View>
-            <Icon
-              color='white'
-              className="material-icons"
-              name="radio-button-unchecked"
-              size={100}
-            />
-          </View>
-          </TouchableOpacity>
+            <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
+                <Icon
+                  color='white'
+                  className="material-icons"
+                  name="filter"
+                  size={40}
+                />
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <TouchableOpacity
+                onPress={this.startRecording.bind(this)}
+                >
+                  <View>
+                    <Icon
+                      color='white'
+                      className="material-icons"
+                      name="radio-button-unchecked"
+                      size={100}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end',}}>
+                <Icon
+                  color='white'
+                  className="material-icons"
+                  name="camera-rear"
+                  size={40}
+                />
+              </View>
+            </View>
         );
 
         if (recording) {
@@ -75,6 +95,8 @@ export default class Camera extends Component {
                 </TouchableOpacity>
               </View>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
                 >
@@ -98,7 +120,7 @@ export default class Camera extends Component {
             style={{ flex: 1, width: '100%', }}
          >
           </RNCamera>
-          <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+          <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
             <View style={{flexDirection: 'row', justifyContent: 'center' }}>
               {button}
             </View>
