@@ -62,7 +62,7 @@ export default class Camera extends Component {
         if (processing) {
           button = (
             <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-              <View style = {{flex: 1, justifyContent: 'center'}}>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.retry.bind(this)}
                   style={styles.capture}
@@ -70,7 +70,7 @@ export default class Camera extends Component {
                   <Text style={{ fontSize: 14 }}> RETRY </Text>
                 </TouchableOpacity>
               </View>
-              <View style = {{flex: 1, justifyContent: 'center'}}>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
                   style={styles.capture}
