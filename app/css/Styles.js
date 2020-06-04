@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 export default StyleSheet.create({
   statusText: {
@@ -76,5 +76,10 @@ export default StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
+  },
+  video: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: 'black',
   },
 });
