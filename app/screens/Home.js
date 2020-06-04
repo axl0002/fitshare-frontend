@@ -45,7 +45,7 @@ export default class Home extends Component {
       'Receive',
       {
         metadata: 'RANDOM', //Change later
-        description: 'https://fitshare-app.s3.eu-west-2.amazonaws.com/5',
+        description: 'https://fitshare-app.s3.eu-west-2.amazonaws.com/test.mp4',
       }
      );
   }
