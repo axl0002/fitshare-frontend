@@ -71,7 +71,6 @@ export default class Home extends Component {
               s3key: key,
             }
            );
-        });
       });
     } catch (error) {
       console.error(error);
