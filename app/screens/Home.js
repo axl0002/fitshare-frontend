@@ -105,7 +105,7 @@ export default class Home extends Component {
                 <Button
                   title='open'
                   onPress={() => 
-                    this.open()
+                    this.open(item.item.id)
                   }
                   >
                 </Button>
