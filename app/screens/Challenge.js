@@ -44,7 +44,7 @@ class Challenge extends Component {
             onChangeText={e => this.setState({ exercise: e })}
             />
           </View>
-          <View style={{marginVertical:20}}>
+          <View style={{marginVertical:30}}>
             <View style = {styles.centerObject}>
               <Text style={styles.challengeFormText}>Distance/ Sets and Reps/ Time</Text>
             </View>
@@ -53,7 +53,7 @@ class Challenge extends Component {
             onChangeText={d => this.setState({ description: d })}
             />
           </View>
-          <View style={styles.bottom}>
+          <View style={{marginVertical:60}}>
             <View style={styles.navButtons}>
               <View>
                 <Button
