@@ -61,11 +61,11 @@ export default StyleSheet.create({
     borderRadius:35,
     marginLeft:35,
     marginRight:35,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   challengeButton: {
     backgroundColor:'#4fd8b6',
-    margin:15
+    margin:15,
   },
   challengeIcons: {
     marginLeft: 6,

@@ -20,20 +20,22 @@ export default class Receive extends Component {
 
   render() {
     return (
-      <Text> { this.state.metadata } </Text>
-      <View style={styles.container}>
-                    <Video source={{ uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key)}}
-                        ref={ ref => 
-                            this.player = ref
-                        }                                      // Store reference
-                        onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                        onError={this.videoError}               // Callback when video cannot be loaded
-                        style={styles.backgroundVideo}
-                        controls={true}
-                        paused={false}
-                        fullscreen={true}
-                    />
-                </View>
+      <View>
+        <Text> { this.state.metadata } </Text>
+        <View style={styles.container}>
+                      <Video source={{ uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key)}}
+                          ref={ (ref) =>
+                            {this.player = ref;}
+                          }                                      // Store reference
+                          onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                          onError={this.videoError}               // Callback when video cannot be loaded
+                          style={styles.backgroundVideo}
+                          controls={true}
+                          paused={false}
+                          fullscreen={true}
+                      />
+        </View>
+      </View>
     );
   }
 }

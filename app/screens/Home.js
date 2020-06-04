@@ -53,7 +53,7 @@ export default class Home extends Component {
   updateSearch = search => {
     this.setState({ search });
   };
-  
+
   async open(targetid) {
     try {
       let response = await fetch(
@@ -75,9 +75,9 @@ export default class Home extends Component {
   }
 
   add(email)  {
-    this.addFriends(email)
-    this.getFriends()
-  };
+    this.addFriends(email);
+    this.getFriends();
+  }
 
   renderSeparator = () => (
   <View
@@ -118,7 +118,7 @@ export default class Home extends Component {
             </View>
             <View>
             <Button
-            type='clear'
+            type="clear"
             icon = {
               <Icon
 
@@ -133,7 +133,6 @@ export default class Home extends Component {
           </View>
 
           <FlatList
-            ItemSeparatorComponent={this.FlatListItemSeparator}
             data={this.state.friends}
             renderItem={item => (
               <TouchableOpacity>
@@ -143,12 +142,11 @@ export default class Home extends Component {
                 />
                 <Text>  {item.item.name}  </Text>
                 <Button
-                  title='open'
-                  onPress={() => 
+                  title="open"
+                  onPress={() =>
                     this.open(item.item.id)
                   }
-                  >
-                </Button>
+                   />
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={this.renderSeparator}

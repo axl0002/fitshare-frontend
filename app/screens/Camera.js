@@ -3,11 +3,6 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import styles from './../css/Styles';
 
-// function Camera({ navigation }) {
-
-// var recording = false;
-// var processing = false;
-
 export default class Camera extends Component {
 
   constructor(props) {
@@ -22,7 +17,7 @@ export default class Camera extends Component {
   }
 
   render() {
-      const { recording, processing } = this.state
+      const { recording, processing } = this.state;
 
           let button = (
           <TouchableOpacity
@@ -54,8 +49,7 @@ export default class Camera extends Component {
                 >
                   <Text style={{ fontSize: 14 }}> RETRY </Text>
                 </TouchableOpacity>
-              <View>
-              </View>
+              <View />
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
                   style={styles.capture}
@@ -72,9 +66,8 @@ export default class Camera extends Component {
         <Text style={{ fontSize: 40 }}>Camera Screen</Text>
           <RNCamera
             ref={ref => { this.camera = ref; }}
-            style={{ flex: 1, width: '100%', }}
-         >
-          </RNCamera>
+            style={{ flex: 1, width: '100%' }}
+          />
           <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
             {button}
         </View>
@@ -100,8 +93,8 @@ export default class Camera extends Component {
       // default to mp4 for android as codec is not set
       const { uri, codec = 'mp4' } = await this.camera.recordAsync();
       this.setState(
-        { 
-          recording: false, 
+        {
+          recording: false,
           processing: true,
           uri: uri,
         }
@@ -128,7 +121,7 @@ export default class Camera extends Component {
       description: this.state.description,
       uri: this.state.uri,
     }
-    )
+    );
   }
 }
 

@@ -5,13 +5,13 @@ export default StyleSheet.create({
        fontSize: 20,
        color: '#fff',
        textAlign: 'center',
-       marginBottom: 10
+       marginBottom: 10,
      },
      loader: {
-       flex: 1, 
+       flex: 1,
        justifyContent: 'center',
        alignItems: 'center',
-       backgroundColor: '#fff'
+       backgroundColor: '#fff',
      },
      list: {
        paddingVertical: 5,
@@ -20,34 +20,33 @@ export default StyleSheet.create({
        backgroundColor: '#fff',
        justifyContent: 'flex-start',
        alignItems: 'center',
-       zIndex: -1
+       zIndex: -1,
      },
      lightText: {
        color: '#000',
        width: 200,
        paddingLeft: 15,
-       fontSize: 12
+       fontSize: 12,
      },
      icon: {
-       position: 'absolute',  
+       position: 'absolute',
        bottom: 20,
-       width: '100%', 
-       left: 290, 
-       zIndex: 1
+       width: '100%',
+       left: 290,
+       zIndex: 1,
      },
      numberBox: {
        position: 'absolute',
        bottom: 75,
        width: 30,
        height: 30,
-       borderRadius: 15,  
+       borderRadius: 15,
        left: 330,
        zIndex: 3,
        backgroundColor: '#e3e3e3',
        justifyContent: 'center',
-       alignItems: 'center'
+       alignItems: 'center',
      },
      number: {fontSize: 14,color: '#000'},
      selected: {backgroundColor: '#628072'},
   });
-  

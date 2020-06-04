@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import UserContext from '../context/UserContext';
 
-import { SearchBar, ListItem, Icon, Button, Avatar } from 'react-native-elements';
+import { SearchBar, ListItem, Avatar } from 'react-native-elements';
 
 import styles from './../css/Styles';
 

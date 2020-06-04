@@ -18,7 +18,7 @@ export default class Send extends Component {
       friends: [],
       exercise: this.props.route.params.exercise,
       description: this.props.route.params.description,
-      uri: this.props.route.params.uri, 
+      uri: this.props.route.params.uri,
     };
   }
 
@@ -34,7 +34,7 @@ export default class Send extends Component {
 
   // TODO: check metadata for null
   async post() {
-    let targetIds = this.state.friends.map(item => {return item.id});
+    let targetIds = this.state.friends.map(item => {return item.id;});
     RNFetchBlob.fetch('POST', 'https://fitshare-backend.herokuapp.com/send', {
       'Content-Type' : 'multipart/form-data',
     }, [
@@ -42,13 +42,13 @@ export default class Send extends Component {
     { name : 'json', data : JSON.stringify({
       user_id : this.context.id,
       targets_ids: targetIds,
-      metadata: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description))
+      metadata: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description)),
     })},
     ]).then((resp) => {
       // ...
     }).catch((err) => {
       console.log('Error', err.message);
-    })
+    });
    }
 
   async getFriends() {
@@ -107,7 +107,7 @@ export default class Send extends Component {
 
   renderFriend = data =>
     <TouchableOpacity
-      style={[sendStyles.list, data.item.selectedClass]}      
+      style={[sendStyles.list, data.item.selectedClass]}
       onPress={() => this.selectFriend(data)}
     >
       <Image
@@ -122,7 +122,7 @@ export default class Send extends Component {
     if (this.state.loading) {
       return (
         <View style={sendStyles.loader}>
-          <ActivityIndicator size='large' color='black' />
+          <ActivityIndicator size="large" color="black" />
         </View>
       );
     }
@@ -159,9 +159,9 @@ export default class Send extends Component {
           <View>
             <Icon
               raised
-              name='send'
-              type='font-awesome'
-              color='#5eb2f7'
+              name="send"
+              type="font-awesome"
+              color="#5eb2f7"
               size={30}
               onPress={() => this.send()}
               containerStyle={{ backgroundColor: '#FA7B5F' }}
