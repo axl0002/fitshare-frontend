@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'react-native-swiper';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, RefreshControl } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
@@ -19,6 +19,7 @@ export default class Home extends Component {
       search: '',
       email: null,
       add: false,
+      refreshing: true,
     };
   }
 
@@ -31,7 +32,7 @@ export default class Home extends Component {
       'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
     ).then((response) => response.json())
      .then((json) => {
-        this.setState({friends: json});
+        this.setState({friends: json, refreshing: false,});
     });
   }
 
@@ -53,6 +54,13 @@ export default class Home extends Component {
   updateSearch = search => {
     this.setState({ search });
   };
+
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ friends: [] });
+    //Call the Service to get the latest data
+    this.getFriends();
+  }
 
   open(targetid) {
     try {
@@ -81,14 +89,14 @@ export default class Home extends Component {
   }
 
   renderSeparator = () => (
-  <View
-    style={{
-      backgroundColor: '#c7c7c7',
-      width: '100%',
-      height: 1,
-    }}
-  />
-);
+      <View
+        style={{
+          backgroundColor: '#c7c7c7',
+          width: '100%',
+          height: 1,
+        }}
+      />
+    );
 
   render() {
     const { search } = this.state;
@@ -157,8 +165,17 @@ export default class Home extends Component {
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
             bottomDivider
+            refreshControl={
+              <RefreshControl
+                //refresh control used for the Pull to Refresh
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+              />
+            }
           />
-
+          <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
+            <Text style={{ color: '#666565'}}> Swipe down to refresh </Text>
+          </View>
         </View>
 
         <View style = {[styles.whiteBackgroundColoring, styles.container]}>
