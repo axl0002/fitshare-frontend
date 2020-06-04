@@ -28,7 +28,6 @@ export default class Send extends Component {
   }
 
   async load() {
-    await this.getCurrentUserInfo();
     await this.getFriends();
   }
 
