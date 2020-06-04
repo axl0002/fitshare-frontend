@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { Icon } from 'react-native-elements';
 import styles from './../css/Styles';
 
 // function Camera({ navigation }) {
@@ -26,36 +27,50 @@ export default class Camera extends Component {
 
           let button = (
           <TouchableOpacity
-            onPress={this.startRecording.bind(this)}
             style={styles.capture}
           >
-            <Text style={{ fontSize: 14 }}> RECORD </Text>
+          <View>
+            <Icon
+
+              className="material-icons"
+              name="radio-button-unchecked"
+              size={40}
+              onPress={this.startRecording.bind(this)}
+            />
+          </View>
           </TouchableOpacity>
         );
 
         if (recording) {
           button = (
             <TouchableOpacity
-              onPress={this.stopRecording.bind(this)}
               style={styles.capture}
             >
-              <Text style={{ fontSize: 14 }}> STOP </Text>
+              <View>
+                <Icon
+
+                  className="material-icons"
+                  name="radio-button-checked"
+                  size={40}
+                  onPress={this.stopRecording.bind(this)}
+                />
+              </View>
             </TouchableOpacity>
           );
         }
 
         if (processing) {
           button = (
-            <View style={styles.navButtons}>
-              <View>
+            <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              <View style = {{flex: 1, justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.retry.bind(this)}
                   style={styles.capture}
                 >
                   <Text style={{ fontSize: 14 }}> RETRY </Text>
                 </TouchableOpacity>
-              <View>
               </View>
+              <View style = {{flex: 1, justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
                   style={styles.capture}
@@ -68,8 +83,6 @@ export default class Camera extends Component {
         }
           return (
       <View style = {styles.container}>
-
-        <Text style={{ fontSize: 40 }}>Camera Screen</Text>
           <RNCamera
             ref={ref => { this.camera = ref; }}
             style={{ flex: 1, width: '100%', }}
@@ -100,8 +113,8 @@ export default class Camera extends Component {
       // default to mp4 for android as codec is not set
       const { uri, codec = 'mp4' } = await this.camera.recordAsync();
       this.setState(
-        { 
-          recording: false, 
+        {
+          recording: false,
           processing: true,
           uri: uri,
         }
