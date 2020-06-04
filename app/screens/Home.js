@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Icon, Button } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
