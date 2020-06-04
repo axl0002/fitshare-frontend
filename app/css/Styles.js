@@ -52,6 +52,11 @@ export default StyleSheet.create({
   searchBarInput: {
     backgroundColor: '#9ce3d1',
   },
+  searchBarLayer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#bfede2',
+  },
   roundedCorners: {
     borderRadius:35,
     marginLeft:35,
