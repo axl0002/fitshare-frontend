@@ -54,7 +54,7 @@ export default class Home extends Component {
     });
   }
 
-  async addFriends(email) {
+  addFriends(email) {
     console.log('send')
     console.log(email)
     fetch('https://fitshare-backend.herokuapp.com/add', {
@@ -68,6 +68,7 @@ export default class Home extends Component {
             }),
     }
     );
+    console.log(this.context.id);
   }
 
   updateSearch = search => {
@@ -75,10 +76,8 @@ export default class Home extends Component {
     // console.log(search)
   };
 
-  add = email =>  {
-    // this.setState({email: search})
+  add(email)  {
     this.addFriends(email)
-    // console.log(email)
 
   };
 
