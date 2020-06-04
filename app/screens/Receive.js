@@ -20,15 +20,19 @@ export default class Receive extends Component {
 
   render() {
     return (
-      <View>
-      <Video source={{uri: 'https://fitshare-app.s3.amazonaws.com/test.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAULIX2RFKYGIOVCCD%2F20200604%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20200604T124752Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=877c8a823b8b0135fa972b219b45d42d2ed6edae75011a8f489af6265ee3b013' }}
-       ref={(ref) => {
-         this.player = ref
-       }}                                      // Store reference
-       onBuffer={this.onBuffer}                // Callback when remote video is buffering
-       onError={this.videoError}               // Callback when video cannot be loaded
-       style={styles.backgroundVideo}/>
-      </View>
+      <View style={styles.container}>
+                    <Video source={{ uri: 'https://d10l22hqwt0sax.cloudfront.net/test.mp4 '}}   // Can be a URL or a local file.
+                        ref={ ref => 
+                            this.player = ref
+                        }                                      // Store reference
+                        onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                        onError={this.videoError}               // Callback when video cannot be loaded
+                        style={styles.backgroundVideo}
+                        controls={true}
+                        paused={false}
+                        fullscreen={true}
+                    />
+                </View>
     );
   }
 }
