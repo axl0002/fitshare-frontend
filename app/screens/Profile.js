@@ -96,9 +96,9 @@ export default class Profile extends Component {
             width={Dimensions.get('window').width}
             height={220}
             chartConfig={{
-              backgroundColor: '#e26a00',
-              backgroundGradientFrom: '#fb8c00',
-              backgroundGradientTo: '#ffa726',
+              backgroundColor: '#FFFFFF',
+              backgroundGradientFrom: '#000000',
+              backgroundGradientTo: '#FFFFFF',
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
