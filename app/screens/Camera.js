@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { Icon } from 'react-native-elements';
 import styles from './../css/Styles';
 
 export default class Camera extends Component {
@@ -20,41 +21,88 @@ export default class Camera extends Component {
       const { recording, processing } = this.state;
 
           let button = (
-          <TouchableOpacity
-            onPress={this.startRecording.bind(this)}
-            style={styles.capture}
-          >
-            <Text style={{ fontSize: 14 }}> RECORD </Text>
-          </TouchableOpacity>
+            <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
+                <Icon
+                  color='white'
+                  className="material-icons"
+                  name="filter"
+                  size={40}
+                />
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
+                <TouchableOpacity
+                onPress={this.startRecording.bind(this)}
+                >
+                  <View>
+                    <Icon
+                      color='white'
+                      className="material-icons"
+                      name="radio-button-unchecked"
+                      size={100}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end',}}>
+                <Icon
+                  color='white'
+                  className="material-icons"
+                  name="camera-rear"
+                  size={40}
+                />
+              </View>
+            </View>
         );
 
         if (recording) {
           button = (
             <TouchableOpacity
               onPress={this.stopRecording.bind(this)}
-              style={styles.capture}
             >
-              <Text style={{ fontSize: 14 }}> STOP </Text>
+              <View>
+                <Icon
+                  color='red'
+                  className="material-icons"
+                  name="radio-button-checked"
+                  size={100}
+                />
+              </View>
             </TouchableOpacity>
           );
         }
 
         if (processing) {
           button = (
-            <View style={styles.navButtons}>
-              <View>
+            <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.retry.bind(this)}
-                  style={styles.capture}
                 >
-                  <Text style={{ fontSize: 14 }}> RETRY </Text>
+                <View>
+                  <Icon
+                    color='white'
+                    className="material-icons"
+                    name="undo"
+                    size={60}
+                  />
+                </View>
                 </TouchableOpacity>
-              <View />
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+              </View>
+              <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
-                  style={styles.capture}
                 >
-                  <Text style={{ fontSize: 14 }}> DONE </Text>
+                <View>
+                  <Icon
+                    color='white'
+                    className="material-icons"
+                    name="check-circle"
+                    size={60}
+                  />
+                </View>
                 </TouchableOpacity>
               </View>
             </View>
@@ -62,15 +110,16 @@ export default class Camera extends Component {
         }
           return (
       <View style = {styles.container}>
-
-        <Text style={{ fontSize: 40 }}>Camera Screen</Text>
           <RNCamera
             ref={ref => { this.camera = ref; }}
-            style={{ flex: 1, width: '100%' }}
-          />
-          <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-            {button}
-        </View>
+            style={{ flex: 1, width: '100%', }}
+         >
+          </RNCamera>
+          <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
+            <View style={{flexDirection: 'row', justifyContent: 'center' }}>
+              {button}
+            </View>
+          </View>
       </View>
     );
   }
