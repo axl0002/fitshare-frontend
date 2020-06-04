@@ -54,21 +54,23 @@ export default class Home extends Component {
     this.setState({ search });
   };
 
-  async open(targetid) {
+  open(targetid) {
     try {
-      let response = await fetch(
-        'https://fitshare-backend.herokuapp.com/open/'.concat(this.context.id).concat('/').concat(targetid)
-      );
-      let json = await response.json();
-      let metadata = json.metadata;
-      let key = json.s3_key;
-      this.props.navigation.navigate(
-        'Receive',
-        {
-          metadata: metadata,
-          s3key: key,
-        }
-       );
+      fetch(
+        'https://fitshare-backend.herokuapp.com/open/'.concat(targetid).concat('/').concat(this.context.id)
+      ).then((response) => {
+        response.json().then((json) => {
+          let metadata = json.metadata;
+          let key = json.s3_key;
+          this.props.navigation.navigate(
+            'Receive',
+            {
+              metadata: metadata,
+              s3key: key,
+            }
+           );
+        });
+      });
     } catch (error) {
       console.error(error);
     }
