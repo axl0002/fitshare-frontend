@@ -27,15 +27,14 @@ export default class Camera extends Component {
 
           let button = (
           <TouchableOpacity
-            style={styles.capture}
+          onPress={this.startRecording.bind(this)}
           >
           <View>
             <Icon
-
+              color='white'
               className="material-icons"
               name="radio-button-unchecked"
-              size={40}
-              onPress={this.startRecording.bind(this)}
+              size={100}
             />
           </View>
           </TouchableOpacity>
@@ -44,15 +43,14 @@ export default class Camera extends Component {
         if (recording) {
           button = (
             <TouchableOpacity
-              style={styles.capture}
+              onPress={this.stopRecording.bind(this)}
             >
               <View>
                 <Icon
-
+                  color='red'
                   className="material-icons"
                   name="radio-button-checked"
-                  size={40}
-                  onPress={this.stopRecording.bind(this)}
+                  size={100}
                 />
               </View>
             </TouchableOpacity>
@@ -65,17 +63,29 @@ export default class Camera extends Component {
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.retry.bind(this)}
-                  style={styles.capture}
                 >
-                  <Text style={{ fontSize: 14 }}> RETRY </Text>
+                <View>
+                  <Icon
+                    color='white'
+                    className="material-icons"
+                    name="undo"
+                    size={60}
+                  />
+                </View>
                 </TouchableOpacity>
               </View>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
                   onPress={this.upload.bind(this)}
-                  style={styles.capture}
                 >
-                  <Text style={{ fontSize: 14 }}> DONE </Text>
+                <View>
+                  <Icon
+                    color='white'
+                    className="material-icons"
+                    name="check-circle"
+                    size={60}
+                  />
+                </View>
                 </TouchableOpacity>
               </View>
             </View>
@@ -88,9 +98,11 @@ export default class Camera extends Component {
             style={{ flex: 1, width: '100%', }}
          >
           </RNCamera>
-          <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-            {button}
-        </View>
+          <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+            <View style={{flexDirection: 'row', justifyContent: 'center' }}>
+              {button}
+            </View>
+          </View>
       </View>
     );
   }
