@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -18,6 +18,7 @@ export default class Home extends Component {
     this.state = {
       friends: null,
       search: '',
+      url: null,
     };
   }
 
@@ -37,6 +38,21 @@ export default class Home extends Component {
   updateSearch = search => {
     this.setState({ search });
   };
+
+  open() {
+    let url = this.fetchVideo();
+    this.props.navigation.navigate(
+      'Receive',
+      {
+        metadata: 'RANDOM', //Change later
+        description: 'https://fitshare-app.s3.eu-west-2.amazonaws.com/5',
+      }
+     );
+  }
+
+  fetchVideo() {
+    //backend endpoint
+  }
 
   renderSeparator = () => (
   <View
@@ -81,6 +97,13 @@ export default class Home extends Component {
                   style={{ width: 40, height: 40, margin: 6 }}
                 />
                 <Text>  {item.item.name}  </Text>
+                <Button
+                  title='open'
+                  onPress={() => 
+                    this.open()
+                  }
+                  >
+                </Button>
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={this.renderSeparator}
