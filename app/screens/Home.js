@@ -135,18 +135,12 @@ export default class Home extends Component {
           <FlatList
             data={this.state.friends}
             renderItem={item => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.open(item.item.id)}>
                 <Image
                   source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg' }}
                   style={{ width: 40, height: 40, margin: 6 }}
                 />
                 <Text>  {item.item.name}  </Text>
-                <Button
-                  title="open"
-                  onPress={() =>
-                    this.open(item.item.id)
-                  }
-                   />
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={this.renderSeparator}
