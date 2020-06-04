@@ -122,7 +122,7 @@ export default class Home extends Component {
             type="clear"
             icon = {
               <Icon
-
+                color= '#666565'
                 className="material-icons"
                 name="person-add"
                 size={40}

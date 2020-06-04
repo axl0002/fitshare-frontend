@@ -90,7 +90,7 @@ export default class Profile extends Component {
               />
             ))}
           </View>
-          <View>
+          <View style = {{marginTop: 25}}>
           <LineChart
             data={line}
             width={Dimensions.get('window').width}

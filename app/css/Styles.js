@@ -10,7 +10,6 @@ export default StyleSheet.create({
   },
   navButtons: {
     flexDirection:'row',
-    alignItems: 'flex-end',
     justifyContent: 'center',
   },
   bottom: {

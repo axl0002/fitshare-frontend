@@ -61,6 +61,7 @@ class Challenge extends Component {
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
+                      color='#666565'
                       iconStyle={styles.challengeIcons}
                       className="material-icons"
                       name="videocam"
@@ -76,6 +77,7 @@ class Challenge extends Component {
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
+                      color='#666565'
                       iconStyle={styles.challengeIcons}
                       className="material-icons"
                       name="thumb-up"
@@ -91,6 +93,7 @@ class Challenge extends Component {
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
+                      color='#666565'
                       iconStyle={styles.challengeIcons}
                       className="material-icons"
                       name="android"
@@ -106,6 +109,7 @@ class Challenge extends Component {
             type="clear"
             icon = {
               <Icon
+                color='#666565'
                 reverse
                 className="camera-button"
                 name="camera-alt"
