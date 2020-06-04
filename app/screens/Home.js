@@ -58,9 +58,7 @@ export default class Home extends Component {
     try {
       fetch(
         'https://fitshare-backend.herokuapp.com/open/'.concat(targetid).concat('/').concat(this.context.id)
-      ).then((response) => {
-        response.json();
-      })
+      ).then(response => response.json())
        .then((json) => {
           let metadata = json.metadata;
           let key = json.s3_key;
