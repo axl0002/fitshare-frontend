@@ -57,7 +57,7 @@ export default class Home extends Component {
   async open(targetid) {
     try {
       let response = await fetch(
-        'https://fitshare-backend.herokuapp.com/send/'.concat(this.context.id).concat('/').concat(targetid)
+        'https://fitshare-backend.herokuapp.com/open/'.concat(this.context.id).concat('/').concat(targetid)
       );
       let json = await response.json();
       let metadata = json.metadata;
