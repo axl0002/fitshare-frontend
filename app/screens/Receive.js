@@ -1,35 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-
-
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { SearchBar, ListItem, Icon, Button, Input } from 'react-native-elements';
+import Video from 'react-native-video';
+
+import UserContext from '../context/UserContext';
 
 import styles from './../css/Styles';
 
-function Receive({ navigation }) {
-  return (
-    <View style = {styles.container}>
+export default class Receive extends Component {
 
-    <Text style={{ fontSize: 40 }}>Running</Text>
-    <Text style={{ fontSize: 20 }}>50km</Text>
+  static contextType = UserContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+        metadata: this.props.route.params.metadata,
+        s3key: this.props.route.params.s3key,
+    };
+  }
 
-      <View style = {styles.bottom}>
-
-        <Button
-        icon = {
-          <Icon
-            reverse
-            className="camera-button"
-            name="camera-alt"
-            size={15}
-            onPress={() => navigation.navigate('Camera')}
-          />
-        }
+  render() {
+    return (
+      <View>
+        <Text> { this.state.metadata } </Text>
+        <Video
+          source={{
+            uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
+          }}
+          style={styles.video}
+          controls={true}
+          resizeMode={'cover'}
         />
-
       </View>
-    </View>
-  );
+    );
+  }
 }
-
-export default Receive;

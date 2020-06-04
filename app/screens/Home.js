@@ -54,10 +54,31 @@ export default class Home extends Component {
     this.setState({ search });
   };
 
+  open(targetid) {
+    try {
+      fetch(
+        'https://fitshare-backend.herokuapp.com/open/'.concat(targetid).concat('/').concat(this.context.id)
+      ).then(response => response.json())
+       .then((json) => {
+          let metadata = json.metadata;
+          let key = json.key;
+          this.props.navigation.navigate(
+            'Receive',
+            {
+              metadata: metadata,
+              s3key: key,
+            }
+           );
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   add(email)  {
-    this.addFriends(email)
-    this.getFriends()
-  };
+    this.addFriends(email);
+    this.getFriends();
+  }
 
   renderSeparator = () => (
   <View
@@ -98,7 +119,7 @@ export default class Home extends Component {
             </View>
             <View>
             <Button
-            type='clear'
+            type="clear"
             icon = {
               <Icon
 
@@ -113,10 +134,9 @@ export default class Home extends Component {
           </View>
 
           <FlatList
-            ItemSeparatorComponent={this.FlatListItemSeparator}
             data={this.state.friends}
             renderItem={item => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.open(item.item.id)}>
                 <Image
                   source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg' }}
                   style={{ width: 40, height: 40, margin: 6 }}

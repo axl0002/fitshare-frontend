@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 export default StyleSheet.create({
   statusText: {
@@ -61,13 +61,25 @@ export default StyleSheet.create({
     borderRadius:35,
     marginLeft:35,
     marginRight:35,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   challengeButton: {
     backgroundColor:'#4fd8b6',
-    margin:15
+    margin:15,
   },
   challengeIcons: {
     marginLeft: 6,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  video: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: 'black',
   },
 });

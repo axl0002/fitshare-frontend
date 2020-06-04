@@ -4,11 +4,6 @@ import { RNCamera } from 'react-native-camera';
 import { Icon } from 'react-native-elements';
 import styles from './../css/Styles';
 
-// function Camera({ navigation }) {
-
-// var recording = false;
-// var processing = false;
-
 export default class Camera extends Component {
 
   constructor(props) {
@@ -23,7 +18,7 @@ export default class Camera extends Component {
   }
 
   render() {
-      const { recording, processing } = this.state
+      const { recording, processing } = this.state;
 
           let button = (
             <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
@@ -175,7 +170,7 @@ export default class Camera extends Component {
       description: this.state.description,
       uri: this.state.uri,
     }
-    )
+    );
   }
 }
 

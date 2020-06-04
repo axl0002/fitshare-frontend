@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { SearchBar, ListItem, Icon, Button, Input } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SearchBar, Icon, Button, Input } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -40,7 +40,7 @@ class Challenge extends Component {
             <View style = {styles.centerObject}>
               <Text style={styles.challengeFormText}>Name of Exercise</Text>
             </View>
-            <Input placeholder='Exercise'
+            <Input placeholder="Exercise"
             onChangeText={e => this.setState({ exercise: e })}
             />
           </View>
@@ -49,7 +49,7 @@ class Challenge extends Component {
               <Text style={styles.challengeFormText}>Distance/ Sets and Reps/ Time</Text>
             </View>
             <Input
-            placeholder='Description'
+            placeholder="Description"
             onChangeText={d => this.setState({ description: d })}
             />
           </View>
@@ -57,7 +57,7 @@ class Challenge extends Component {
             <View style={styles.navButtons}>
               <View>
                 <Button
-                  title='Live'
+                  title="Live"
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
@@ -72,7 +72,7 @@ class Challenge extends Component {
               </View>
               <View>
                 <Button
-                  title='Streak'
+                  title="Streak"
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
@@ -87,7 +87,7 @@ class Challenge extends Component {
               </View>
               <View>
                 <Button
-                  title='Battle'
+                  title="Battle"
                   buttonStyle={styles.challengeButton}
                   icon = {
                     <Icon
@@ -103,7 +103,7 @@ class Challenge extends Component {
             </View>
 
             <Button
-            type='clear'
+            type="clear"
             icon = {
               <Icon
                 reverse
