@@ -14,14 +14,15 @@ export default class Receive extends Component {
     super(props);
     this.state = {
         metadata: this.props.route.params.metadata,
-        uri: this.props.route.params.url,
+        s3key: this.props.route.params.s3key,
       };
     }
 
   render() {
     return (
+      <Text> { this.state.metadata } </Text>
       <View style={styles.container}>
-                    <Video source={{ uri: 'https://d10l22hqwt0sax.cloudfront.net/test.mp4 '}}   // Can be a URL or a local file.
+                    <Video source={{ uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key)}}
                         ref={ ref => 
                             this.player = ref
                         }                                      // Store reference

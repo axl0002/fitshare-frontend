@@ -39,19 +39,24 @@ export default class Home extends Component {
     this.setState({ search });
   };
 
-  open() {
-    let url = this.fetchVideo();
-    this.props.navigation.navigate(
-      'Receive',
-      {
-        metadata: 'RANDOM', //Change later
-        description: 'https://fitshare-app.s3.eu-west-2.amazonaws.com/test.mp4',
-      }
-     );
-  }
-
-  fetchVideo() {
-    //backend endpoint
+  async open(targetid) {
+    try {
+      let response = await fetch(
+        'https://fitshare-backend.herokuapp.com/send/'.concat(this.context.id).concat('/').concat(targetid)
+      );
+      let json = await response.json();
+      let metadata = json.metadata;
+      let key = json.s3_key;
+      this.props.navigation.navigate(
+        'Receive',
+        {
+          metadata: metadata,
+          s3key: key,
+        }
+       );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   renderSeparator = () => (
