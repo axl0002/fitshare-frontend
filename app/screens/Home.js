@@ -36,8 +36,6 @@ export default class Home extends Component {
   }
 
   addFriends(email) {
-    console.log('send')
-    console.log(email)
     fetch('https://fitshare-backend.herokuapp.com/add', {
       method: 'POST',
       headers: {
@@ -54,12 +52,11 @@ export default class Home extends Component {
 
   updateSearch = search => {
     this.setState({ search });
-    // console.log(search)
   };
 
   add(email)  {
     this.addFriends(email)
-
+    this.getFriends()
   };
 
   renderSeparator = () => (
@@ -74,15 +71,6 @@ export default class Home extends Component {
 
   render() {
     const { search } = this.state;
-
-    let button = (
-    <TouchableOpacity
-      onPress={this.add(search)}
-      style={styles.searchBarButton}
-    >
-      <Text style={{ fontSize: 14 }}> ADD </Text>
-    </TouchableOpacity>
-    );
 
     return (
       <Swiper
