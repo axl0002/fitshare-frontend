@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
-import { SearchBar, Icon, Button } from 'react-native-elements';
+import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -137,11 +137,21 @@ export default class Home extends Component {
             data={this.state.friends}
             renderItem={item => (
               <TouchableOpacity onPress={() => this.open(item.item.id)}>
-                <Image
-                  source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg' }}
-                  style={{ width: 40, height: 40, margin: 6 }}
-                />
-                <Text>  {item.item.name}  </Text>
+                <View style = {{ flex: 1, flexDirection: 'row'}}>
+                <View>
+                  <Avatar
+                    rounded
+                    style={{ width: 50, height: 50, margin: 6 }}
+                    source={{
+                      uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
+                    }}
+                    />
+                </View>
+                <View style = {{justifyContent: 'center'}}>
+                  <Text>  {item.item.name}  </Text>
+                  <Text>  Tap on me  </Text>
+                </View>
+                </View>
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={this.renderSeparator}

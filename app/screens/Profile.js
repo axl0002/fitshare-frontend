@@ -69,7 +69,7 @@ export default class Profile extends Component {
               rounded
               size="xlarge"
               source={{
-                uri:'https://media-exp1.licdn.com/dms/image/C5603AQFEn0wblZFgZw/profile-displayphoto-shrink_200_200/0?e=1596067200&v=beta&t=_YzQoX17JaNACtagQDpJMiD0ZeTs4zXYnTdF9MfUh4A',
+                uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
               }}
               />
             </View>
