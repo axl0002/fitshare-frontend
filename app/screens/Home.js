@@ -53,6 +53,26 @@ export default class Home extends Component {
   updateSearch = search => {
     this.setState({ search });
   };
+  
+  async open(targetid) {
+    try {
+      let response = await fetch(
+        'https://fitshare-backend.herokuapp.com/send/'.concat(this.context.id).concat('/').concat(targetid)
+      );
+      let json = await response.json();
+      let metadata = json.metadata;
+      let key = json.s3_key;
+      this.props.navigation.navigate(
+        'Receive',
+        {
+          metadata: metadata,
+          s3key: key,
+        }
+       );
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   add(email)  {
     this.addFriends(email)
@@ -122,6 +142,13 @@ export default class Home extends Component {
                   style={{ width: 40, height: 40, margin: 6 }}
                 />
                 <Text>  {item.item.name}  </Text>
+                <Button
+                  title='open'
+                  onPress={() => 
+                    this.open(item.item.id)
+                  }
+                  >
+                </Button>
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={this.renderSeparator}
