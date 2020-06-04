@@ -31,12 +31,13 @@ const users = [
 
 export default class Home extends Component {
   static contextType = UserContext;
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
       friends: null,
       search: '',
+      email: null,
+      add: false,
     };
   }
 
@@ -53,8 +54,32 @@ export default class Home extends Component {
     });
   }
 
+  async addFriends(email) {
+    console.log('send')
+    console.log(email)
+    fetch('https://fitshare-backend.herokuapp.com/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+                source_id: this.context.id,
+                target_email: email,
+            }),
+    }
+    );
+  }
+
   updateSearch = search => {
     this.setState({ search });
+    // console.log(search)
+  };
+
+  add = email =>  {
+    // this.setState({email: search})
+    this.addFriends(email)
+    // console.log(email)
+
   };
 
   renderSeparator = () => (
@@ -70,6 +95,15 @@ export default class Home extends Component {
   render() {
     const { search } = this.state;
 
+    let button = (
+    <TouchableOpacity
+      onPress={this.add(search)}
+      style={styles.searchBarButton}
+    >
+      <Text style={{ fontSize: 14 }}> ADD </Text>
+    </TouchableOpacity>
+    );
+
     return (
       <Swiper
         loop={false}
@@ -82,14 +116,34 @@ export default class Home extends Component {
         </View>
 
         <View style = {[styles.whiteBackgroundColoring, styles.container]}>
-          <SearchBar
-          lightTheme
-          containerStyle={styles.searchBarContainer}
-          inputContainerStyle={styles.searchBarInput}
-          placeholder="Search Friends..."
-          onChangeText={this.updateSearch}
-          value={search}
-          />
+          <View style={styles.searchBarLayer}>
+            <View style={{flex: 1}}>
+              <SearchBar
+              lightTheme
+              round
+              containerStyle={styles.searchBarContainer}
+              inputContainerStyle={styles.searchBarInput}
+              placeholder="Search Friends..."
+              onChangeText={this.updateSearch}
+              value={search}
+              />
+            </View>
+            <View>
+            <Button
+            type='clear'
+            icon = {
+              <Icon
+
+                className="material-icons"
+                name="person-add"
+                size={40}
+                onPress={() => this.add(search)}
+              />
+            }
+            />
+            </View>
+          </View>
+
           <FlatList
             ItemSeparatorComponent={this.FlatListItemSeparator}
             data={this.state.friends}
