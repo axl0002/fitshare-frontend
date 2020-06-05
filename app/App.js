@@ -60,6 +60,12 @@ class App extends Component {
     };
   }
 
+  signOut = () => {
+    GoogleSignin.signOut().then(() => {
+      this.setState({ isSignedIn: false });
+    });
+  }
+
   setUserData = (data) => {
     fetch('https://fitshare-backend.herokuapp.com/user', {
       method: 'POST',
