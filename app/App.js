@@ -99,8 +99,9 @@ class App extends Component {
     if (!this.state.isSignedIn) {
       return <Login setUserData={this.setUserData} />;
     } else {
+      var userData = Object.assign({}, this.state.data.user, {signOut: this.signOut});
       return (
-        <UserContext.Provider value={this.state.data.user}>
+        <UserContext.Provider value={userData}>
           <NavStack />
         </UserContext.Provider>
       );
