@@ -113,6 +113,7 @@ export default class Camera extends Component {
           <RNCamera
             ref={ref => { this.camera = ref; }}
             style={{ flex: 1, width: '100%', }}
+            type={RNCamera.Constants.Type.front}
          >
           </RNCamera>
           <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
