@@ -77,7 +77,7 @@ class App extends Component {
       (ret) => {
         GoogleSignin.signInSilently().then((data) => {
           this.setState({ data });
-          this.setState({ isSignedIn: ret });
+          this.setState({ isSignedIn: true });
         });
     });
   }
@@ -87,7 +87,9 @@ class App extends Component {
       return <Login setUserData={this.setUserData} />;
     } else {
       return (
-        <UserContext.Provider value={this.state.data.user}>
+        <UserContext.Provider
+          value={this.state.data.user}
+          isSignedIn={this.state.isSignedIn}>
           <NavStack />
         </UserContext.Provider>
       );
