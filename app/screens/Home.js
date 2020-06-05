@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'react-native-swiper';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, Modal, RefreshControl } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
@@ -19,6 +19,8 @@ export default class Home extends Component {
       search: '',
       email: null,
       add: false,
+      refreshing: true,
+      modalVisible: false,
     };
   }
 
@@ -31,12 +33,12 @@ export default class Home extends Component {
       'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
     ).then((response) => response.json())
      .then((json) => {
-        this.setState({friends: json});
+        this.setState({friends: json, refreshing: false,});
     });
   }
 
-  addFriends(email) {
-    fetch('https://fitshare-backend.herokuapp.com/add', {
+  async addFriends(email) {
+    let response = await fetch('https://fitshare-backend.herokuapp.com/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,13 +48,30 @@ export default class Home extends Component {
                 target_email: email,
             }),
     }
-    );
-    console.log(this.context.id);
+  ).then(resp => ({ status: resp.status}));
+
+    if(response.status == 400) {
+      this.setState({modalVisible: true})
+    } else {
+    }
   }
 
   updateSearch = search => {
     this.setState({ search });
   };
+
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ friends: [] });
+    //Call the Service to get the latest data
+    this.getFriends();
+  }
+
+  closeModal() {
+    setTimeout(() => {
+      this.setState({modalVisible: false})
+    }, 1000);
+  }
 
   open(targetid) {
     try {
@@ -81,17 +100,18 @@ export default class Home extends Component {
   }
 
   renderSeparator = () => (
-  <View
-    style={{
-      backgroundColor: '#c7c7c7',
-      width: '100%',
-      height: 1,
-    }}
-  />
-);
+      <View
+        style={{
+          backgroundColor: '#c7c7c7',
+          width: '100%',
+          height: 1,
+        }}
+      />
+    );
 
   render() {
     const { search } = this.state;
+
 
     return (
       <Swiper
@@ -133,6 +153,19 @@ export default class Home extends Component {
             </View>
           </View>
 
+          <View>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onShow={() => this.closeModal()}
+          >
+            <View style = {{flexDirection: 'row', justifyContent: 'center', backgroundColor: 'red'}}>
+              <Text> Not valid email </Text>
+            </View>
+          </Modal>
+          </View>
+
           <FlatList
             data={this.state.friends}
             renderItem={item => (
@@ -157,8 +190,17 @@ export default class Home extends Component {
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
             bottomDivider
+            refreshControl={
+              <RefreshControl
+                //refresh control used for the Pull to Refresh
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh.bind(this)}
+              />
+            }
           />
-
+          <View style = {{flexDirection: 'row', justifyContent: 'center'}}>
+            <Text style={{ color: '#666565'}}> Swipe down to refresh </Text>
+          </View>
         </View>
 
         <View style = {[styles.whiteBackgroundColoring, styles.container]}>
