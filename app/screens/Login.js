@@ -8,20 +8,12 @@ class Login extends Component {
   }
 
   render() {
-    var onPress = async () => {
-      try {
-        await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignin.signIn();
+    var onPress = () => {
+      GoogleSignin.hasPlayServices().then((inp) => {
+        return GoogleSignin.signIn();
+      }).then((userInfo) => {
         this.props.setUserData(userInfo);
-        this.props.isSignedIn = true;
-      } catch (error) {
-        // leaving this here to add a loading spinner in the future (maybe)
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        } else {
-        }
-      }
+      });
     };
 
     return (
