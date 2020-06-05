@@ -60,26 +60,33 @@ class App extends Component {
     };
   }
 
-  setUserData = async (data) => {
-    this.setState({ data });
-
+  setUserData = (data) => {
     fetch('https://fitshare-backend.herokuapp.com/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
+    }).then(() => {
+      this.setState({ data });
+      this.setState({ isSignedIn: true });
     });
   }
 
   componentDidMount() {
-    GoogleSignin.isSignedIn().then(
-      (ret) => {
-        GoogleSignin.signInSilently().then((data) => {
-          this.setState({ data });
-          this.setState({ isSignedIn: ret });
-        });
-    });
+    GoogleSignin.isSignedIn()
+      .then((isSigned) => {
+        if (isSigned) {
+          GoogleSignin.signInSilently()
+          .then((data) => {
+            console.log(data);
+            this.setState({ data });
+            this.setState({ isSignedIn: true });
+          });
+        } else {
+          this.setState({ isSignedIn: false });
+        }
+      });
   }
 
   render() {
