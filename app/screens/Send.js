@@ -57,7 +57,7 @@ export default class Send extends Component {
       );
       let json = await response.json();
       let mapped = json.map(item => {
-              item.avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg';
+              item.avatar = 'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png';
               item.isSelect = false;
               item.selectedClass = sendStyles.list;
             return item;

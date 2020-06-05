@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'react-native-swiper';
-import { View, Text, FlatList, TouchableOpacity, Image, Modal, RefreshControl } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Modal, RefreshControl } from 'react-native';
 import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
@@ -109,6 +109,51 @@ export default class Home extends Component {
       />
     );
 
+  renderIcon(status) {
+    switch(status) {
+        case 'NEW':
+          return(
+          <Icon
+            color='deepskyblue'
+            className='material-icons'
+            name='chat-bubble'
+            size={20}
+          />);
+        case 'SENT':
+          return(
+          <Icon
+            color='green'
+            className='material-icons'
+            name='done'
+            size={20}
+          />);
+        case 'OPENED':
+          return(
+          <Icon
+            color='deepskyblue'
+            className='material-icons'
+            name='chat-bubble-outline'
+            size={20}
+          />);
+        case 'COMPLETE':
+          return(
+          <Icon
+            color='green'
+            className='material'
+            name='done-all'
+            size={20}
+          />);
+        default:
+          return(
+          <Icon
+            color='gray'
+            className='material-icons'
+            name='chat-bubble-outline'
+            size={20}
+          />);
+    }
+  }
+
   render() {
     const { search } = this.state;
 
@@ -171,6 +216,7 @@ export default class Home extends Component {
             renderItem={item => (
               <TouchableOpacity onPress={() => this.open(item.item.id)}>
                 <View style = {{ flex: 1, flexDirection: 'row'}}>
+                <View style = {{ flex: 1, flexDirection: 'row'}}>
                 <View>
                   <Avatar
                     rounded
@@ -180,9 +226,10 @@ export default class Home extends Component {
                     }}
                     />
                 </View>
-                <View style = {{justifyContent: 'center'}}>
+                <View style = {{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
                   <Text>  {item.item.name}  </Text>
-                  <Text>  Tap on me  </Text>
+                  {this.renderIcon(item.item.status)}
+                </View>
                 </View>
                 </View>
               </TouchableOpacity>
