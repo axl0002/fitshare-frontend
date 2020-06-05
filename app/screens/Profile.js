@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import UserContext from '../context/UserContext';
 
-import { SearchBar, ListItem, Avatar } from 'react-native-elements';
+import { SearchBar, ListItem, Avatar, Button } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -39,7 +39,6 @@ export default class Profile extends Component {
   updateSearch = search => {
     this.setState({ search });
   };
-
 
   render() {
     const { search } = this.state;
@@ -107,7 +106,8 @@ export default class Profile extends Component {
             }}
             bezier
           />
-        </View>
+          </View>
+          <Button title="logout" onPress={ this.context.signOut }/>
       </ScrollView>
     );
   }
