@@ -159,6 +159,34 @@ export default class Home extends Component {
 
 
     return (
+      <View style = {{flex:1}}>
+      <View style={styles.searchBarLayer}>
+        <View style={{flex: 1}}>
+          <SearchBar
+          lightTheme
+          round
+          containerStyle={styles.searchBarContainer}
+          inputContainerStyle={styles.searchBarInput}
+          placeholder="Search Friends..."
+          onChangeText={this.updateSearch}
+          value={search}
+          />
+        </View>
+        <View>
+        <Button
+        type="clear"
+        icon = {
+          <Icon
+            color= '#666565'
+            className="material-icons"
+            name="person-add"
+            size={40}
+            onPress={() => this.add(search)}
+          />
+        }
+        />
+        </View>
+      </View>
       <Swiper
         loop={false}
         showsPagination={false}
@@ -170,33 +198,7 @@ export default class Home extends Component {
         </View>
 
         <View style = {[styles.whiteBackgroundColoring, styles.container]}>
-          <View style={styles.searchBarLayer}>
-            <View style={{flex: 1}}>
-              <SearchBar
-              lightTheme
-              round
-              containerStyle={styles.searchBarContainer}
-              inputContainerStyle={styles.searchBarInput}
-              placeholder="Search Friends..."
-              onChangeText={this.updateSearch}
-              value={search}
-              />
-            </View>
-            <View>
-            <Button
-            type="clear"
-            icon = {
-              <Icon
-                color= '#666565'
-                className="material-icons"
-                name="person-add"
-                size={40}
-                onPress={() => this.add(search)}
-              />
-            }
-            />
-            </View>
-          </View>
+
 
           <View>
           <Modal
@@ -255,6 +257,7 @@ export default class Home extends Component {
         </View>
 
       </Swiper>
+      </View>
     );
   }
 }

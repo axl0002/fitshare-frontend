@@ -28,14 +28,7 @@ class Challenge extends Component {
       <KeyboardAwareScrollView
       >
         <View style = {styles.container}>
-        <SearchBar
-        lightTheme
-        containerStyle={styles.searchBarContainer}
-        inputContainerStyle={styles.searchBarInput}
-        placeholder="Search Friends..."
-        onChangeText={this.updateSearch}
-        value={search}
-        />
+        
           <View style={{marginTop:50}}>
             <View style = {styles.centerObject}>
               <Text style={styles.challengeFormText}>Name of Exercise</Text>
