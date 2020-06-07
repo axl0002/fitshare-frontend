@@ -27,6 +27,7 @@ export default StyleSheet.create({
   },
   centerObject: {
     display: 'flex',
+    textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -40,10 +41,17 @@ export default StyleSheet.create({
     fontWeight: 'normal',
     lineHeight: 25,
   },
-  challengeFormText: {
+  challengeFormLabel: {
     // fontFamily: "Segoe UI",
-    fontSize: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#888891',
+  },
+  challengeFormInput: {
+    // fontFamily: "Segoe UI",
+    fontSize: 19,
     fontWeight: 'normal',
+    color: '#888891',
   },
   searchBarContainer: {
     backgroundColor: '#bfede2',

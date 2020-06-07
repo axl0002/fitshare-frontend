@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import styles from './../css/Styles';
 
 export default class Camera extends Component {
@@ -121,6 +121,26 @@ export default class Camera extends Component {
             type={this.state.cameraDirection}
          >
           </RNCamera>
+          <View style ={{position: 'absolute', left: -20, top: -10}}>
+            <Button
+            type="clear"
+            icon = {
+              <Icon
+                reverse
+                className="material-icons"
+                name="keyboard-backspace"
+                color='transparent'
+                size={47}
+                onPress={() => this.props.navigation.navigate('Home',
+                  {
+                    exercise: this.state.exercise,
+                    description: this.state.description,
+                  }
+                )}
+              />
+            }
+            />
+          </View>
           <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
             <View style={{flexDirection: 'row', justifyContent: 'center' }}>
               {button}
