@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SearchBar, Icon, Button, Input } from 'react-native-elements';
+import { Icon, Button, Input } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -28,7 +28,7 @@ class Challenge extends Component {
       <KeyboardAwareScrollView
       >
         <View style = {styles.container}>
-        
+
           <View style={{marginTop:50}}>
             <View style = {styles.centerObject}>
               <Text style={styles.challengeFormText}>Name of Exercise</Text>
