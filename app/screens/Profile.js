@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import UserContext from '../context/UserContext';
 
-import { SearchBar, ListItem, Avatar, Button } from 'react-native-elements';
+import { ListItem, Avatar, Button } from 'react-native-elements';
 
 import styles from './../css/Styles';
 
@@ -54,14 +54,6 @@ export default class Profile extends Component {
 
     return (
       <ScrollView style = {styles.container}>
-      <SearchBar
-      lightTheme
-      containerStyle={styles.searchBarContainer}
-      inputContainerStyle={styles.searchBarInput}
-      placeholder="Search Friends..."
-      onChangeText={this.updateSearch}
-      value={search}
-      />
         <View style = {styles.centerObject}>
           <View style = {styles.profileAvatar}>
             <Avatar

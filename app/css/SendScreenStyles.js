@@ -48,5 +48,5 @@ export default StyleSheet.create({
        alignItems: 'center',
      },
      number: {fontSize: 14,color: '#000'},
-     selected: {backgroundColor: '#628072'},
+     selected: {backgroundColor: '#85c5f9'},
   });
