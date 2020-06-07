@@ -153,7 +153,6 @@ export default class Camera extends Component {
 
   async startRecording() {
       this.setState({ recording: true });
-      console.log('recording..');
 
       // default to mp4 for android as codec is not set
       const { uri, codec = 'mp4' } = await this.camera.recordAsync();
@@ -167,19 +166,14 @@ export default class Camera extends Component {
   }
 
   stopRecording() {
-    console.log('stop.');
-
       this.camera.stopRecording();
-      console.log('processing video...');
   }
 
   retry() {
-    console.log('retry');
     this.setState({ recording: false, processing: false });
 
   }
   upload() {
-    console.log('uploading video');
     this.props.navigation.navigate('Send',
     {
       exercise: this.state.exercise,
