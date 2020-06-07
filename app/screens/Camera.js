@@ -14,6 +14,7 @@ export default class Camera extends Component {
       description: this.props.route.params.description,
       exercise: this.props.route.params.exercise,
       uri: null,
+      cameraDirection: RNCamera.Constants.Type.back,
     };
   }
 
@@ -45,12 +46,16 @@ export default class Camera extends Component {
                 </TouchableOpacity>
               </View>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end',}}>
+              <TouchableOpacity
+              onPress={this.flipCamera.bind(this)}
+              >
                 <Icon
                   color='white'
                   className="material-icons"
                   name="camera-rear"
                   size={40}
                 />
+                </TouchableOpacity>
               </View>
             </View>
         );
@@ -113,7 +118,7 @@ export default class Camera extends Component {
           <RNCamera
             ref={ref => { this.camera = ref; }}
             style={{ flex: 1, width: '100%', }}
-            type={RNCamera.Constants.Type.front}
+            type={this.state.cameraDirection}
          >
           </RNCamera>
           <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
@@ -133,6 +138,16 @@ export default class Camera extends Component {
 //     console.log('hi');
 //   }
 // };
+
+
+  flipCamera() {
+    if (this.state.cameraDirection ==  RNCamera.Constants.Type.back) {
+      this.setState({cameraDirection: RNCamera.Constants.Type.front});
+    }
+    else {
+      this.setState({cameraDirection: RNCamera.Constants.Type.back});
+    }
+  }
 
 
 
