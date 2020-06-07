@@ -19,8 +19,14 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  login: {
+    flex: 1,
+    backgroundColor:'#44d8c2',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   backgroundColoring: {
-    backgroundColor:'#f2fcfa',
+    backgroundColor:'#d4f7f2',
   },
   whiteBackgroundColoring: {
     backgroundColor:'#FFFFFF',
@@ -54,15 +60,15 @@ export default StyleSheet.create({
     color: '#888891',
   },
   searchBarContainer: {
-    backgroundColor: '#bfede2',
+    backgroundColor: '#a9efe5',
   },
   searchBarInput: {
-    backgroundColor: '#9ce3d1',
+    backgroundColor: '#7ee7d7',
   },
   searchBarLayer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#bfede2',
+    backgroundColor: '#a9efe5',
   },
   roundedCorners: {
     borderRadius:35,
@@ -71,7 +77,7 @@ export default StyleSheet.create({
     overflow: 'hidden',
   },
   challengeButton: {
-    backgroundColor:'#4fd8b6',
+    backgroundColor:'#7ee7d7',
     margin:15,
   },
   challengeIcons: {
