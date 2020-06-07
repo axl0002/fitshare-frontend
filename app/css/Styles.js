@@ -19,6 +19,12 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  login: {
+    flex: 1,
+    backgroundColor:'#9ce3d1',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   backgroundColoring: {
     backgroundColor:'#f2fcfa',
   },

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
+import styles from './../css/Styles';
+
 
 class Login extends Component {
   constructor(props) {
@@ -17,10 +20,13 @@ class Login extends Component {
     };
 
     return (
-      <GoogleSigninButton
-      size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Dark}
-      onPress={onPress}/>);
+      <View style = {styles.login}>
+        <GoogleSigninButton
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={onPress}/>
+      </View>
+    );
   }
 
 }
