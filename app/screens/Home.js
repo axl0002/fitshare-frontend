@@ -4,6 +4,7 @@ import { View, Text, FlatList, TouchableOpacity, Modal, RefreshControl } from 'r
 import Profile from './Profile';
 import Challenge from './Challenge';
 import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
+import Emoji from 'react-native-emoji';
 
 import styles from './../css/Styles';
 
@@ -109,48 +110,98 @@ export default class Home extends Component {
       />
     );
 
-  renderIcon(status) {
+  renderIcon(status, date) {
     switch(status) {
         case 'NEW':
           return(
-          <Icon
-            color='deepskyblue'
-            className='material-icons'
-            name='chat-bubble'
-            size={20}
-          />);
+            <View style = {{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
+               <Icon
+                color='deepskyblue'
+                className='material-icons'
+                name='chat-bubble'
+                size={20}
+              />
+              <Text style={styles.friendTextStyle}>
+                {' • Tap to open a challenge'}
+              </Text>
+            </View>);
         case 'SENT':
           return(
-          <Icon
-            color='green'
-            className='material-icons'
-            name='done'
-            size={20}
-          />);
+            <View style = {{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
+              <Icon
+                color='green'
+                className='material-icons'
+                name='done'
+                size={20}
+              />
+              <Text style={styles.friendTextStyle}>
+                {' • Sent • '.concat(date)}
+              </Text>
+            </View>);
         case 'OPENED':
           return(
-          <Icon
-            color='deepskyblue'
-            className='material-icons'
-            name='chat-bubble-outline'
-            size={20}
-          />);
+            <View style = {{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
+              <Icon
+                color='deepskyblue'
+                className='material-icons'
+                name='chat-bubble-outline'
+                size={20}
+              />
+              <Text style={styles.friendTextStyle}>
+                {' • Completed • '.concat(date)}
+              </Text>
+            </View>);
         case 'COMPLETE':
           return(
-          <Icon
-            color='green'
-            className='material'
-            name='done-all'
-            size={20}
-          />);
+            <View style = {{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
+              <Icon
+                color='green'
+                className='material'
+                name='done-all'
+                size={20}
+              />
+              <Text style={styles.friendTextStyle}>
+                {' • Completed • '.concat(date)}
+              </Text>
+            </View>);
         default:
           return(
-          <Icon
-            color='gray'
-            className='material-icons'
-            name='chat-bubble-outline'
-            size={20}
-          />);
+            <View style = {{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }}>
+               <Icon
+                color='gray'
+                className='material-icons'
+                name='chat-bubble-outline'
+                size={20}
+              />
+              <Text style={styles.friendTextStyle}>
+                {' • Tap to send a challenge'}
+              </Text>
+            </View>);
+    }
+  }
+
+  renderStreaks(streak) {
+    if (streak == 0) {
+      return (
+        <View>
+          <Emoji name="third_place_medal" style={{fontSize: 15}} />
+          <Text style={{paddingHorizontal: 2,}}> { streak } </Text>
+        </View>
+      );
+    } else if (streak > 0 && streak < 5) {
+      return (
+        <View>
+          <Emoji name="second_place_medal" style={{fontSize: 15}} />
+          <Text style={{paddingHorizontal: 2,}}> { streak } </Text>
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <Emoji name="first_place_medal" style={{fontSize: 15}} />
+          <Text style={{paddingHorizontal: 2,}}> { streak } </Text>
+        </View>
+      );
     }
   }
 
@@ -218,21 +269,24 @@ export default class Home extends Component {
             renderItem={item => (
               <TouchableOpacity onPress={() => this.open(item.item.id)}>
                 <View style = {{ flex: 1, flexDirection: 'row'}}>
-                <View style = {{ flex: 1, flexDirection: 'row'}}>
-                <View>
-                  <Avatar
-                    rounded
-                    style={{ width: 50, height: 50, margin: 6 }}
-                    source={{
-                      uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
-                    }}
-                    />
-                </View>
-                <View style = {{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <Text>  {item.item.name}  </Text>
-                  {this.renderIcon(item.item.status)}
-                </View>
-                </View>
+                  <View>
+                    <Avatar
+                      rounded
+                      style={{ width: 50, height: 50, margin: 6 }}
+                      source={{
+                        uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
+                      }}
+                      />
+                  </View>
+                  <View style = {{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <Text>  {item.item.name}  </Text>
+                    {this.renderIcon(item.item.status, item.item.time)}
+                  </View>
+                  <View style = {{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                    {this.renderStreaks(
+                      item.item.streak
+                    )}
+                  </View>
                 </View>
               </TouchableOpacity>
             )}
