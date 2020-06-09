@@ -11,14 +11,6 @@ import styles from './../css/Styles';
 export default class Profile extends Component {
   static contextType = UserContext;
 
-  state = {
-    search: '',
-  }
-
-  updateSearch = search => {
-    this.setState({ search });
-  };
-
   render() {
     return (
       <ScrollView style = {styles.container}>
