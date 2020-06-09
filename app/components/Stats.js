@@ -2,57 +2,37 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { ListItem } from 'react-native-elements';
+import UserContext from '../context/UserContext';
 
-const stats = [
-  {
-    icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
-    name: 'longest streak',
-    value: '36',
-  },
-  {
-    icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
-    name: 'challenge sent',
-    value: '50',
-  },
-  {
-    icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
-    name: 'challenges received',
-    value: '44',
-  },  {
-      icon: 'http://www.clipartbest.com/cliparts/9TR/n4x/9TRn4xqTe.png',
-      name: 'challenges completed',
-      value: '97%',
-    },
-];
+
 
 import styles from './../css/Styles';
 
-export default class Profile extends Component {
+class Chart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
 
   render() {
-    const line = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-      datasets: [
-        {
-          data: [20, 45, 28, 80, 99, 43],
-          strokeWidth: 2, // optional
-        },
-      ],
-    };
+    console.log(this.props);
+    if (Object.keys(this.props.data).length === 0) {
+      return (<View/>);
+    } else {
+      const line = {
+        labels: Object.keys(this.props.data),
+        datasets: [
+          {
+            data: Object.values(this.props.data),
+            strokeWidth: 2,
+          },
+        ],
+      };
 
-    return (
-      <View>
-          <View style={styles.roundedCorners}>
-            {stats.map((l, i) => (
-              <ListItem
-                key={i}
-                leftAvatar={{ source: { uri: l.icon } }}
-                title={l.name}
-                subtitle={l.value}
-                bottomDivider
-              />
-            ))}
-          </View>
+      return (
           <View style = {{marginTop: 25}}>
           <LineChart
             data={line}
@@ -71,8 +51,52 @@ export default class Profile extends Component {
             bezier
           />
           </View>
+      );
+    }
+  }
+}
+
+export default class Profile extends Component {
+  static contextType = UserContext;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+       isReady: false,
+    };
+  }
+
+  render() {
+    if (this.state.isReady){
+      return (
+      <View>
+          <View style={styles.roundedCorners}>
+            <ListItem
+                key="1"
+                title="Challenges completed:"
+                subtitle={this.state.challengesDone}
+                bottomDivider
+            />
+            <ListItem
+                key="2"
+                title="Challenges sent:"
+                subtitle={this.state.challengesSent}
+            />
+          </View>
+          <Chart data={this.state.challengesByDay}/>
       </View>
     );
+    } else {
+      fetch(
+        'https://fitshare-backend.herokuapp.com/data/'.concat(this.context.id)
+      ).then((response) => response.json())
+       .then((json) => {
+         console.log(this.state);
+         this.setState(json);
+         this.setState({isReady: true});
+      });
+      return (<View/>);
+    }
   }
 }
 
