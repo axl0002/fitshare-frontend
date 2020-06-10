@@ -4,7 +4,14 @@ import { RNCamera } from 'react-native-camera';
 import { Icon, Button } from 'react-native-elements';
 import Video from 'react-native-video';
 import styles from './../css/Styles';
+import ImagePicker from 'react-native-image-picker';
 
+const options = {
+  title: 'Select video',
+   mediaType: 'video',
+  path:'video',
+  quality: 1
+};
 export default class Camera extends Component {
 
   constructor(props) {
@@ -18,6 +25,8 @@ export default class Camera extends Component {
       cameraDirection: RNCamera.Constants.Type.back,
     };
   }
+
+
 
   render() {
       const { recording, processing } = this.state;
@@ -52,12 +61,16 @@ export default class Camera extends Component {
           let button = (
             <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
+              <TouchableOpacity
+              onPress={this.chooseFromGallery.bind(this)}
+              >
                 <Icon
                   color='white'
                   className="material-icons"
                   name="filter"
                   size={40}
                 />
+              </TouchableOpacity>
               </View>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
                 <TouchableOpacity
@@ -224,6 +237,31 @@ export default class Camera extends Component {
       uri: this.state.uri,
     }
     );
+  }
+
+  chooseFromGallery() {
+      ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          recording: false,
+          processing: true,
+          uri: response.uri,
+        });
+      }
+    });
   }
 }
 
