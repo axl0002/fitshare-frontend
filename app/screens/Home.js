@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Swiper from 'react-native-swiper';
 import { View, Text, FlatList, TouchableOpacity, Modal, RefreshControl } from 'react-native';
-import Profile from './Profile';
-import Challenge from './Challenge';
 import { SearchBar, Icon, Button, Avatar } from 'react-native-elements';
 import Emoji from 'react-native-emoji';
+
+import Profile from './Profile';
+import Challenge from './Challenge';
+import Channels from './Channels';
 
 import styles from './../css/Styles';
 
@@ -308,6 +310,10 @@ export default class Home extends Component {
 
         <View style = {[styles.whiteBackgroundColoring, styles.container]}>
           <Challenge/>
+        </View>
+
+        <View style = {[styles.whiteBackgroundColoring, styles.container]}>
+          <Channels/>
         </View>
 
       </Swiper>

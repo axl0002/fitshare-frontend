@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Challenge from './screens/Challenge';
 import Camera from './screens/Camera';
+import Channels from './screens/Channels'
 import Login from './screens/Login';
 import Receive from './screens/Receive';
 import Send from './screens/Send';
@@ -37,6 +38,10 @@ class NavStack extends Component {
       <Stack.Screen
         name="Camera"
         component={Camera}
+      />
+      <Stack.Screen
+        name="Channels"
+        component={Channels}
       />
       <Stack.Screen
         name="Receive"
