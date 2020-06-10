@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Icon, Button } from 'react-native-elements';
+import Video from 'react-native-video';
 import styles from './../css/Styles';
+import ImagePicker from 'react-native-image-picker';
 
+const options = {
+  title: 'Select video',
+   mediaType: 'video',
+  path:'video',
+  quality: 1
+};
 export default class Camera extends Component {
 
   constructor(props) {
@@ -18,18 +26,51 @@ export default class Camera extends Component {
     };
   }
 
+
+
   render() {
       const { recording, processing } = this.state;
-
+        let camera = (
+          <RNCamera
+              ref={ref => { this.camera = ref; }}
+              style={{ flex: 1, width: '100%', }}
+              type={this.state.cameraDirection}
+           >
+            </RNCamera>
+        );
+          let back = (
+            <Button
+            type="clear"
+            icon = {
+              <Icon
+                reverse
+                className="material-icons"
+                name="keyboard-backspace"
+                color='transparent'
+                size={47}
+                onPress={() => this.props.navigation.navigate('Home',
+                  {
+                    exercise: this.state.exercise,
+                    description: this.state.description,
+                  }
+                )}
+              />
+            }
+            />
+          );
           let button = (
             <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
+              <TouchableOpacity
+              onPress={this.chooseFromGallery.bind(this)}
+              >
                 <Icon
                   color='white'
                   className="material-icons"
                   name="filter"
                   size={40}
                 />
+              </TouchableOpacity>
               </View>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start'}}>
                 <TouchableOpacity
@@ -75,6 +116,11 @@ export default class Camera extends Component {
               </View>
             </TouchableOpacity>
           );
+
+          back = (
+            <View>
+            </View>
+          )
         }
 
         if (processing) {
@@ -112,34 +158,24 @@ export default class Camera extends Component {
               </View>
             </View>
           );
+
+          camera = (
+            <Video
+              source={{
+                uri: this.state.uri,
+              }}
+              style={styles.video}
+              controls={false}
+              resizeMode={'cover'}
+              repeat={true}
+            />
+          );
         }
           return (
       <View style = {styles.container}>
-          <RNCamera
-            ref={ref => { this.camera = ref; }}
-            style={{ flex: 1, width: '100%', }}
-            type={this.state.cameraDirection}
-         >
-          </RNCamera>
+            {camera}
           <View style ={{position: 'absolute', left: -20, top: -10}}>
-            <Button
-            type="clear"
-            icon = {
-              <Icon
-                reverse
-                className="material-icons"
-                name="keyboard-backspace"
-                color='transparent'
-                size={47}
-                onPress={() => this.props.navigation.navigate('Home',
-                  {
-                    exercise: this.state.exercise,
-                    description: this.state.description,
-                  }
-                )}
-              />
-            }
-            />
+            {back}
           </View>
           <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
             <View style={{flexDirection: 'row', justifyContent: 'center' }}>
@@ -201,6 +237,31 @@ export default class Camera extends Component {
       uri: this.state.uri,
     }
     );
+  }
+
+  chooseFromGallery() {
+      ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          recording: false,
+          processing: true,
+          uri: response.uri,
+        });
+      }
+    });
   }
 }
 
