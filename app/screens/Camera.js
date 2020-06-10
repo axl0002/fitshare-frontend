@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Icon, Button } from 'react-native-elements';
+import Video from 'react-native-video';
 import styles from './../css/Styles';
 
 export default class Camera extends Component {
@@ -20,7 +21,34 @@ export default class Camera extends Component {
 
   render() {
       const { recording, processing } = this.state;
-
+        let camera = (
+          <RNCamera
+              ref={ref => { this.camera = ref; }}
+              style={{ flex: 1, width: '100%', }}
+              type={this.state.cameraDirection}
+           >
+            </RNCamera>
+        );
+          let back = (
+            <Button
+            type="clear"
+            icon = {
+              <Icon
+                reverse
+                className="material-icons"
+                name="keyboard-backspace"
+                color='transparent'
+                size={47}
+                onPress={() => this.props.navigation.navigate('Home',
+                  {
+                    exercise: this.state.exercise,
+                    description: this.state.description,
+                  }
+                )}
+              />
+            }
+            />
+          );
           let button = (
             <View style = {{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
               <View style = {{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end'}}>
@@ -75,6 +103,11 @@ export default class Camera extends Component {
               </View>
             </TouchableOpacity>
           );
+
+          back = (
+            <View>
+            </View>
+          )
         }
 
         if (processing) {
@@ -112,34 +145,24 @@ export default class Camera extends Component {
               </View>
             </View>
           );
+
+          camera = (
+            <Video
+              source={{
+                uri: this.state.uri,
+              }}
+              style={styles.video}
+              controls={false}
+              resizeMode={'cover'}
+              repeat={true}
+            />
+          );
         }
           return (
       <View style = {styles.container}>
-          <RNCamera
-            ref={ref => { this.camera = ref; }}
-            style={{ flex: 1, width: '100%', }}
-            type={this.state.cameraDirection}
-         >
-          </RNCamera>
+            {camera}
           <View style ={{position: 'absolute', left: -20, top: -10}}>
-            <Button
-            type="clear"
-            icon = {
-              <Icon
-                reverse
-                className="material-icons"
-                name="keyboard-backspace"
-                color='transparent'
-                size={47}
-                onPress={() => this.props.navigation.navigate('Home',
-                  {
-                    exercise: this.state.exercise,
-                    description: this.state.description,
-                  }
-                )}
-              />
-            }
-            />
+            {back}
           </View>
           <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
             <View style={{flexDirection: 'row', justifyContent: 'center' }}>
