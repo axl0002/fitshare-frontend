@@ -15,6 +15,7 @@ export default class Channels extends Component {
 			search: '',
 			channels: [],
 			modalVisible: false,
+			buttonPressed: false,
 		};
 	}
 
@@ -47,6 +48,7 @@ export default class Channels extends Component {
     if(response.status != 201) {
 			this.setState({modalVisible: true,})
 		}
+		this.getChannels();
 	}
 	
 	async leaveChannel(groupId) {
@@ -65,6 +67,7 @@ export default class Channels extends Component {
     if(response.status != 204) {
 			this.setState({modalVisible: true,})
 		}
+		this.getChannels();
   }
 
 	updateSearch = search => {
@@ -109,7 +112,7 @@ export default class Channels extends Component {
 						title='Join'
 						color='green'
 						buttonStyle={styles.challengeButton}
-						onPress={() => {this.joinChannel(data.item.id)	}}/>
+						onPress={() => {this.joinChannel(data.item.id); this.setState({ buttonPressed: true}); }}/>
 				</View>
       </View>
     </TouchableOpacity>
@@ -128,7 +131,7 @@ export default class Channels extends Component {
 						title='Leave'
 						color='red'
 						buttonStyle={styles.challengeButton}
-						onPress={() => {this.leaveChannel(data.item.id)	}}/>
+						onPress={() => {this.leaveChannel(data.item.id); this.setState({ buttonPressed: true});	}}/>
 				</View>
       </View>
     </TouchableOpacity>
