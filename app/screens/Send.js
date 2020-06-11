@@ -29,6 +29,7 @@ export default class Send extends Component {
 
   load() {
     this.getFriends();
+    this.getChannels();
   }
 
   // TODO: check metadata for null
@@ -66,6 +67,15 @@ export default class Send extends Component {
         this.setState({friends: mapped});
       });
   }
+
+  getChannels() {
+      fetch(
+        'https://fitshare-backend.herokuapp.com/channels/'.concat(this.context.id)
+      ).then((response) => {
+        return response.json();
+      }).then((json) => {
+        this.setState({channels: json.user_channels});
+      });
   }
 
   updateSearch = search => {
@@ -147,6 +157,15 @@ export default class Send extends Component {
           data={this.state.friends}
           ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={item => this.renderFriend(item)}
+          keyExtractor={item => item.id.toString()}
+          extraData={this.state}
+          bottomDivider
+        />
+        <Text>{'Channels'}</Text>
+        <FlatList
+          data={this.state.channels}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
+          // renderItem={item => this.renderFriend(item)}
           keyExtractor={item => item.id.toString()}
           extraData={this.state}
           bottomDivider
