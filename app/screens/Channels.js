@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, FlatList, TouchableOpacity, Button, RefreshControl, } from 'react-native';
+import { ScrollView, View, Text, FlatList, TouchableOpacity, Button, Modal, } from 'react-native';
 import Emoji from 'react-native-emoji';
 
 import UserContext from '../context/UserContext';
@@ -14,6 +14,7 @@ export default class Channels extends Component {
 		this.state = {
 			search: '',
 			channels: [],
+			modalVisible: false,
 		};
 	}
 
@@ -44,7 +45,7 @@ export default class Channels extends Component {
   ).then(resp => ({ status: resp.status}));
 
     if(response.status != 201) {
-			console.log('ERROR')
+			this.setState({modalVisible: true,})
 		}
 	}
 	
@@ -62,7 +63,7 @@ export default class Channels extends Component {
   ).then(resp => ({ status: resp.status}));
 
     if(response.status != 204) {
-			console.log('ERROR')
+			this.setState({modalVisible: true,})
 		}
   }
 
@@ -148,6 +149,18 @@ export default class Channels extends Component {
 	render() {
 		return (
 			<View style = {[styles.whiteBackgroundColoring, styles.container]}>
+			<View>
+				<Modal
+					animationType="fade"
+					transparent={true}
+					visible={this.state.modalVisible}
+					onShow={() => this.closeModal()}
+				>
+					<View style = {{flexDirection: 'row', justifyContent: 'center', backgroundColor: 'red'}}>
+						<Text> Looks like something went wrong </Text>
+					</View>
+				</Modal>
+				</View>
 			<View>
 			<Text style={[styles.centerObject,styles.challengeFormLabel]}> My channels </Text>
 					<FlatList
