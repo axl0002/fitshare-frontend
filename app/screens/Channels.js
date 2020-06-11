@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, FlatList, TouchableOpacity, Button, Modal, } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Button, Modal, } from 'react-native';
 import Emoji from 'react-native-emoji';
 
 import UserContext from '../context/UserContext';
@@ -71,33 +71,6 @@ export default class Channels extends Component {
     this.setState({ search });
 	};
 
-	renderButton(id) {
-		let index = this.state.myChannels.findIndex(item => item.id === id);
-		if (index < 0) {
-			return(
-				<Button
-				title='Join'
-				color='green'
-				buttonStyle={styles.challengeButton}
-				onPress={() => { 
-					this.joinChannel(id);
-				}}
-      />
-			);
-		} else {
-			return(
-				<Button
-				title='Leave'
-				color='red'
-				buttonStyle={styles.challengeButton}
-				onPress={() => { 
-					this.leaveChannel(id);
-				}}
-      />
-			);
-		}
-	}
-
 	renderSeparator = () => (
 		<View
 			style={{
@@ -107,6 +80,20 @@ export default class Channels extends Component {
 			}}
 		/>
 	);
+
+	noUserChannels = () => {
+    return (
+      <View style={styles.MainContainer}>
+        <Text style={{ textAlign: 'center' }}> You have no channel subscriptions </Text>
+      </View>
+		);};
+		
+	noPopularChannels = () => {
+		return (
+			<View style={styles.MainContainer}>
+				<Text style={{ textAlign: 'center' }}> There are no other channels currently available </Text>
+			</View>
+		);};
 
 	renderOtherChannel = data =>
     <TouchableOpacity>
@@ -169,6 +156,7 @@ export default class Channels extends Component {
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
 						bottomDivider
+						ListEmptyComponent={this.noUserChannels()}
           />
 				<Text></Text>
 				<Text style={[styles.centerObject,styles.challengeFormLabel]}> Popular channels </Text>
@@ -178,6 +166,7 @@ export default class Channels extends Component {
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
 						bottomDivider
+						ListEmptyComponent={this.noPopularChannels()}
           />
 			</View>
 			</View>
