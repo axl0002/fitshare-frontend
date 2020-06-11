@@ -53,6 +53,18 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#888891',
   },
+  sendSearchLabel: {
+    // fontFamily: "Segoe UI",
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#888891',
+  },
+  sendFriendsLabel: {
+    // fontFamily: "Segoe UI",
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#888891',
+  },
   challengeFormInput: {
     // fontFamily: "Segoe UI",
     fontSize: 19,
