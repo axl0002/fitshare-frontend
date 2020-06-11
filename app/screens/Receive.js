@@ -45,18 +45,20 @@ class Receive extends Component {
   );
     return (
       <View style = {styles.container}>
-        <View>
+        <View style={{paddingTop:20}}>
           <Text> { this.state.metadata } </Text>
-          <Video
-            source={{
-              uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
-            }}
-            style={styles.video}
-            controls={false}
-            resizeMode={'cover'}
-            repeat={true}
-            hideShutterView={true}
-          />
+          <View>
+            <Video
+              source={{
+                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
+              }}
+              style={styles.video}
+              controls={false}
+              resizeMode={'cover'}
+              repeat={true}
+              hideShutterView={true}
+            />
+          </View>
         </View>
         <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
           <View style={{flexDirection: 'row', justifyContent: 'center' }}>
