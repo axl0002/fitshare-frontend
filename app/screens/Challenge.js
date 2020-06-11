@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon, Button, Input } from 'react-native-elements';
@@ -43,13 +43,15 @@ class Challenge extends Component {
   render() {
     const { navigation } = this.props;
     const { search } = this.state;
+    const paddingSmall = (Dimensions.get('window').height) * 0.1;
+    const paddingMed = (Dimensions.get('window').height) * 0.19;
 
     return (
       <KeyboardAwareScrollView
       >
         <View style = {styles.container}>
 
-          <View style={{marginTop:50, marginHorizontal: 10}}>
+          <View style={{marginTop: paddingSmall, marginHorizontal: 10}}>
 
             <Text style={[styles.centerObject,styles.challengeFormLabel]}>Name of Exercise</Text>
 
@@ -61,7 +63,7 @@ class Challenge extends Component {
             onChangeText={e => this.setState({ exercise: e })}
             />
           </View>
-          <View style={{marginVertical:30, marginHorizontal: 10}}>
+          <View style={{marginTop: paddingSmall, marginHorizontal: 10}}>
             <Text style={[styles.centerObject,styles.challengeFormLabel]}>Distance/ Sets and Reps/ Time</Text>
 
             <TextInput
@@ -73,7 +75,7 @@ class Challenge extends Component {
             />
 
           </View>
-          <View style={{marginVertical:60}}>
+          <View style={{marginTop: paddingMed}}>
             <View style={styles.navButtons}>
               <View>
                 <Button
