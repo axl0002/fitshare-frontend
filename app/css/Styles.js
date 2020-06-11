@@ -55,6 +55,7 @@ export default StyleSheet.create({
   },
   sendSearchLabel: {
     // fontFamily: "Segoe UI",
+    textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
     color: '#888891',
