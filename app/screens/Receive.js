@@ -46,17 +46,38 @@ class Receive extends Component {
     return (
       <View style = {styles.container}>
         <View>
-          <Text> { this.state.metadata } </Text>
-          <Video
-            source={{
-              uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
-            }}
-            style={styles.video}
-            controls={false}
-            resizeMode={'cover'}
-            repeat={true}
-            hideShutterView={true}
+          <View>
+            <Video
+              source={{
+                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
+              }}
+              style={styles.video}
+              controls={false}
+              resizeMode={'cover'}
+              repeat={true}
+              hideShutterView={true}
+            />
+          </View>
+        </View>
+        <View style ={{position: 'absolute', left: -20, top: -10}}>
+        <Button
+        type="clear"
+        icon = {
+          <Icon
+            reverse
+            className="material-icons"
+            name="keyboard-backspace"
+            color='transparent'
+            size={47}
+            onPress={() => this.props.navigation.navigate('Home')}
           />
+        }
+        />
+        </View>
+        <View  style ={{position: 'absolute', left: 35, right:35, top: 90}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center', backgroundColor: '#a9efe595', borderRadius:10,}}>
+            <Text style={styles.sendSearchLabel}> { this.state.metadata } </Text>
+          </View>
         </View>
         <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
           <View style={{flexDirection: 'row', justifyContent: 'center' }}>

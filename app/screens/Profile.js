@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import UserContext from '../context/UserContext';
 
 import { Avatar, Button } from 'react-native-elements';
@@ -23,7 +23,12 @@ export default class Profile extends Component {
                 uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
               }}
               />
-            </View>
+          </View>
+          <View style={{margin:20}}>
+            <Text style={styles.profileText}>
+              {this.context.name}
+            </Text>
+          </View>
           </View>
           <Stats/>
           <Button title="logout" onPress={ this.context.signOut }/>
