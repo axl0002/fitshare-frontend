@@ -18,6 +18,7 @@ export default class Send extends Component {
       friends: [],
       exercise: this.props.route.params.exercise,
       description: this.props.route.params.description,
+      challenge: this.props.route.params.challenge,
       uri: this.props.route.params.uri,
     };
   }
@@ -41,7 +42,8 @@ export default class Send extends Component {
     { name : 'json', data : JSON.stringify({
       user_id : this.context.id,
       targets_ids: targetIds,
-      metadata: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description)),
+      // metadata: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description)),
+      metadata: this.state.challenge,
     })},
     ]).then((resp) => {
       // ...

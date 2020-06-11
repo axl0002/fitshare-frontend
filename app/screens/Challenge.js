@@ -138,6 +138,7 @@ class Challenge extends Component {
                   {
                     exercise: this.state.exercise,
                     description: this.state.description,
+                    challenge: 'Exercise: '.concat(this.state.exercise).concat(', Description: '.concat(this.state.description)),
                   }
                 )}
               />

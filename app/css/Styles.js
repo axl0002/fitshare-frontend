@@ -95,4 +95,10 @@ export default StyleSheet.create({
     height: Dimensions.get('window').height,
     backgroundColor: 'black',
   },
+  friendTextStyle: {
+    color: 'gray',
+    fontSize: 14,
+    fontWeight: 'normal',
+    lineHeight: 17,
+  },
 });
