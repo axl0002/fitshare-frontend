@@ -17,6 +17,7 @@ export default class Send extends Component {
     this.state = {
       loading: false,
       friends: [],
+      channels: [],
       exercise: this.props.route.params.exercise,
       description: this.props.route.params.description,
       challenge: this.props.route.params.challenge,
@@ -75,7 +76,12 @@ export default class Send extends Component {
       ).then((response) => {
         return response.json();
       }).then((json) => {
-        this.setState({channels: json.user_channels});
+        let mapped = json.user_channels.map(item => {
+            item.isSelect = false;
+            item.selectedClass = sendStyles.list;
+            return item;
+        });
+        this.setState({channels: mapped});
       });
   }
 
@@ -97,6 +103,17 @@ export default class Send extends Component {
     };
 
   selectChannel = data => {
+    console.log(data);
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect ?
+                  sendStyles.selected : sendStyles.list;
+    const index = this.state.channels.findIndex(
+      item => data.item.id === item.id
+    );
+    this.state.channels[index] = data.item;
+    this.setState({
+      channels: this.state.channels,
+    });
   };
 
   send() {
@@ -143,7 +160,8 @@ export default class Send extends Component {
     </TouchableOpacity>
 
   render() {
-    const itemNumber = this.state.friends.filter(item => item.isSelect).length;
+    const itemNumber = this.state.friends.filter(item => item.isSelect).length +
+                       this.state.channels.filter(item => item.isSelect).length;
     if (this.state.loading) {
       return (
         <View style={sendStyles.loader}>
@@ -168,7 +186,7 @@ export default class Send extends Component {
           bottomDivider
         /> */}
 
-        <Text>{'Friends'}</Text>
+        <Text>Friends</Text>
         <FlatList
           data={this.state.friends}
           ItemSeparatorComponent={this.FlatListItemSeparator}
@@ -177,7 +195,7 @@ export default class Send extends Component {
           extraData={this.state}
           bottomDivider
         />
-        <Text>{'Channels'}</Text>
+        <Text>Channels</Text>
         <FlatList
           data={this.state.channels}
           ItemSeparatorComponent={this.FlatListItemSeparator}
