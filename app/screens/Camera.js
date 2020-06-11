@@ -21,6 +21,7 @@ export default class Camera extends Component {
       processing: false,
       description: this.props.route.params.description,
       exercise: this.props.route.params.exercise,
+      challenge: this.props.route.params.challenge,
       uri: null,
       cameraDirection: RNCamera.Constants.Type.back,
     };
@@ -234,6 +235,7 @@ export default class Camera extends Component {
     {
       exercise: this.state.exercise,
       description: this.state.description,
+      challenge: this.state.challenge,
       uri: this.state.uri,
     }
     );
