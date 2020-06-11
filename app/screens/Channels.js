@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, FlatList, TouchableOpacity, } from 'react-native';
+import { ScrollView, View, Text, FlatList, TouchableOpacity, Button, RefreshControl, } from 'react-native';
 import Emoji from 'react-native-emoji';
 
 import UserContext from '../context/UserContext';
@@ -13,14 +13,12 @@ export default class Channels extends Component {
 		super(props);
 		this.state = {
 			search: '',
-			myChannels: null,
-			popularChannels: null,
+			channels: [],
 		};
 	}
 
 	componentDidMount() {
 		this.getChannels();
-		this.getPopularChannels();
 	}
 	
 	async getChannels() {
@@ -28,54 +26,149 @@ export default class Channels extends Component {
       'https://fitshare-backend.herokuapp.com/channels/'.concat(this.context.id)
     ).then((response) => response.json())
      .then((json) => {
-        this.setState({myChannels: json});
+        this.setState({channels: json,});
     });
 	}
 	
-	async getPopularChannels() {
-    await fetch(
-      'https://fitshare-backend.herokuapp.com/channels/popular'
-    ).then((response) => response.json())
-     .then((json) => {
-        this.setState({popularChannels: json});
-    });
+	async joinChannel(groupId) {
+    let response = await fetch('https://fitshare-backend.herokuapp.com/join', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+                userid: this.context.id,
+                groupid: groupId,
+            }),
+    }
+  ).then(resp => ({ status: resp.status}));
+
+    if(response.status != 201) {
+			console.log('ERROR')
+		}
+	}
+	
+	async leaveChannel(groupId) {
+    let response = await fetch('https://fitshare-backend.herokuapp.com/leave', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+                userid: this.context.id,
+                groupid: groupId,
+            }),
+    }
+  ).then(resp => ({ status: resp.status}));
+
+    if(response.status != 204) {
+			console.log('ERROR')
+		}
   }
 
 	updateSearch = search => {
     this.setState({ search });
 	};
 
-	// TODO: store emojies in DB?
-	renderChannel = data =>
+	renderButton(id) {
+		let index = this.state.myChannels.findIndex(item => item.id === id);
+		if (index < 0) {
+			return(
+				<Button
+				title='Join'
+				color='green'
+				buttonStyle={styles.challengeButton}
+				onPress={() => { 
+					this.joinChannel(id);
+				}}
+      />
+			);
+		} else {
+			return(
+				<Button
+				title='Leave'
+				color='red'
+				buttonStyle={styles.challengeButton}
+				onPress={() => { 
+					this.leaveChannel(id);
+				}}
+      />
+			);
+		}
+	}
+
+	renderSeparator = () => (
+		<View
+			style={{
+				backgroundColor: '#c7c7c7',
+				width: '100%',
+				height: 1,
+			}}
+		/>
+	);
+
+	renderOtherChannel = data =>
     <TouchableOpacity>
-      <Emoji name="first_place_medal" style={{fontSize: 15}} />
-      <Text>  {data.item.name}  </Text>
-			<Text>  {data.item.description}  </Text>
-			<Text>  {data.item.count}  </Text>
+			<View style = {{ flex: 1, flexDirection: 'row'}}>
+				<Emoji name={data.item.avatar} style={{fontSize: 15}} />
+				<View style = {{ flex: 1, flexDirection: 'column'}}>
+					<Text>  {data.item.name}  </Text>
+					<Text style={styles.friendTextStyle}> {data.item.description}  </Text>
+					<Text style={styles.friendTextStyle}> Members: {data.item.count}  </Text>
+				</View>
+				<View style={{margin:10}}>
+					<Button
+						title='Join'
+						color='green'
+						buttonStyle={styles.challengeButton}
+						onPress={() => {this.joinChannel(data.item.id)	}}/>
+				</View>
+      </View>
+    </TouchableOpacity>
+
+	renderUserChannel = data =>
+    <TouchableOpacity>
+			<View style = {{ flex: 1, flexDirection: 'row'}}>
+				<Emoji name={data.item.avatar} style={{fontSize: 15}} />
+				<View style = {{ flex: 1, flexDirection: 'column'}}>
+					<Text>  {data.item.name}  </Text>
+					<Text style={styles.friendTextStyle}> {data.item.description}  </Text>
+					<Text style={styles.friendTextStyle}> Members: {data.item.count}  </Text>
+				</View>
+				<View style={{margin:10}}>
+					<Button
+						title='Leave'
+						color='red'
+						buttonStyle={styles.challengeButton}
+						onPress={() => {this.leaveChannel(data.item.id)	}}/>
+				</View>
+      </View>
     </TouchableOpacity>
 	
 	render() {
 		return (
-		<ScrollView style = {styles.container}>
+			<View style = {[styles.whiteBackgroundColoring, styles.container]}>
 			<View>
-				<Text>{'My channels'}</Text>
+			<Text style={[styles.centerObject,styles.challengeFormLabel]}> My channels </Text>
 					<FlatList
-            data={this.state.myChannels}
-            renderItem={item => this.renderChannel(item)}
+            data={this.state.channels.user_channels}
+            renderItem={item => this.renderUserChannel(item)}
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
-            bottomDivider
+						bottomDivider
           />
-				<Text>{'Popular channels'}</Text>
+				<Text></Text>
+				<Text style={[styles.centerObject,styles.challengeFormLabel]}> Popular channels </Text>
 					<FlatList
-            data={this.state.popularChannels}
-            renderItem={item => this.renderChannel(item)}
+            data={this.state.channels.other}
+            renderItem={item => this.renderOtherChannel(item)}
             ItemSeparatorComponent={this.renderSeparator}
             keyExtractor={(item, index) => index.toString()}
-            bottomDivider
+						bottomDivider
           />
 			</View>
-		</ScrollView>);
+			</View>
+			);
 	}
 
 }
