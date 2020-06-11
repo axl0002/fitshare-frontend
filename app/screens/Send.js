@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import Emoji from 'react-native-emoji';
 import RNFetchBlob from 'react-native-fetch-blob';
 
 import UserContext from '../context/UserContext';
@@ -16,8 +17,9 @@ export default class Send extends Component {
     this.state = {
       loading: false,
       friends: [],
-      // exercise: this.props.route.params.exercise,
-      // description: this.props.route.params.description,
+      channels: [],
+      exercise: this.props.route.params.exercise,
+      description: this.props.route.params.description,
       challenge: this.props.route.params.challenge,
       uri: this.props.route.params.uri,
     };
@@ -25,11 +27,11 @@ export default class Send extends Component {
 
   componentDidMount() {
     this.load();
-
   }
 
-  async load() {
-    await this.getFriends();
+  load() {
+    this.getFriends();
+    this.getChannels();
   }
 
   // TODO: check metadata for null
@@ -52,22 +54,35 @@ export default class Send extends Component {
     });
    }
 
-  async getFriends() {
-    try {
-      let response = await fetch(
+  getFriends() {
+      fetch(
         'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
-      );
-      let json = await response.json();
-      let mapped = json.map(item => {
+      ).then((response) => {
+        return response.json();
+      }).then((json) => {
+        let mapped = json.map(item => {
               item.avatar = 'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png';
               item.isSelect = false;
               item.selectedClass = sendStyles.list;
             return item;
-          });
-      this.setState({friends: mapped});
-    } catch (error) {
-      console.error(error);
-    }
+        });
+        this.setState({friends: mapped});
+      });
+  }
+
+  getChannels() {
+      fetch(
+        'https://fitshare-backend.herokuapp.com/channels/'.concat(this.context.id)
+      ).then((response) => {
+        return response.json();
+      }).then((json) => {
+        let mapped = json.user_channels.map(item => {
+            item.isSelect = false;
+            item.selectedClass = sendStyles.list;
+            return item;
+        });
+        this.setState({channels: mapped});
+      });
   }
 
   updateSearch = search => {
@@ -86,6 +101,20 @@ export default class Send extends Component {
       friends: this.state.friends,
     });
     };
+
+  selectChannel = data => {
+    console.log(data);
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect ?
+                  sendStyles.selected : sendStyles.list;
+    const index = this.state.channels.findIndex(
+      item => data.item.id === item.id
+    );
+    this.state.channels[index] = data.item;
+    this.setState({
+      channels: this.state.channels,
+    });
+  };
 
   send() {
     this.post();
@@ -118,8 +147,21 @@ export default class Send extends Component {
       <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
     </TouchableOpacity>
 
+  renderChannel = data =>
+    <TouchableOpacity
+      style={[sendStyles.list, data.item.selectedClass]}
+      onPress={() => this.selectChannel(data)}
+    >
+      <Emoji
+        name={ data.item.avatar }
+        style={{ width: 40, height: 40, margin: 6 }}
+      />
+      <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
+    </TouchableOpacity>
+
   render() {
-    const itemNumber = this.state.friends.filter(item => item.isSelect).length;
+    const itemNumber = this.state.friends.filter(item => item.isSelect).length +
+                       this.state.channels.filter(item => item.isSelect).length;
     if (this.state.loading) {
       return (
         <View style={sendStyles.loader}>
@@ -143,6 +185,7 @@ export default class Send extends Component {
           extraData={this.state}
           bottomDivider
         /> */}
+
         <View style={[styles.centerObject,styles.searchBarLayer]}>
         <Text style={styles.sendSearchLabel}>Send To</Text>
         </View>
@@ -153,6 +196,17 @@ export default class Send extends Component {
           data={this.state.friends}
           ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={item => this.renderFriend(item)}
+          keyExtractor={item => item.id.toString()}
+          extraData={this.state}
+          bottomDivider
+        />
+        <View style = {{marginLeft: 10}}>
+        <Text style={styles.sendFriendsLabel}>Channels</Text>
+        </View>
+        <FlatList
+          data={this.state.channels}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
+          renderItem={item => this.renderChannel(item)}
           keyExtractor={item => item.id.toString()}
           extraData={this.state}
           bottomDivider
