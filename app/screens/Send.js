@@ -25,11 +25,10 @@ export default class Send extends Component {
 
   componentDidMount() {
     this.load();
-
   }
 
-  async load() {
-    await this.getFriends();
+  load() {
+    this.getFriends();
   }
 
   // TODO: check metadata for null
@@ -52,22 +51,21 @@ export default class Send extends Component {
     });
    }
 
-  async getFriends() {
-    try {
-      let response = await fetch(
+  getFriends() {
+      fetch(
         'https://fitshare-backend.herokuapp.com/friends/'.concat(this.context.id)
-      );
-      let json = await response.json();
-      let mapped = json.map(item => {
+      ).then((response) => {
+        return response.json();
+      }).then((json) => {
+        let mapped = json.map(item => {
               item.avatar = 'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png';
               item.isSelect = false;
               item.selectedClass = sendStyles.list;
             return item;
-          });
-      this.setState({friends: mapped});
-    } catch (error) {
-      console.error(error);
-    }
+        });
+        this.setState({friends: mapped});
+      });
+  }
   }
 
   updateSearch = search => {
