@@ -36,7 +36,7 @@ export default class Send extends Component {
 
   // TODO: check metadata for null
   post() {
-    let targetIds = this.state.friends.map(item => {return item.id;});
+    let targetIds = this.state.friends.filter(item => item.isSelect === true).map(item => {return item.id;});
     RNFetchBlob.fetch('POST', 'https://fitshare-backend.herokuapp.com/send', {
       'Content-Type' : 'multipart/form-data',
     }, [
