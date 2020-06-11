@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import Emoji from 'react-native-emoji';
 import RNFetchBlob from 'react-native-fetch-blob';
 
 import UserContext from '../context/UserContext';
@@ -95,6 +96,9 @@ export default class Send extends Component {
     });
     };
 
+  selectChannel = data => {
+  };
+
   send() {
     this.post();
     this.props.navigation.navigate(
@@ -121,6 +125,18 @@ export default class Send extends Component {
     >
       <Image
         source={{ uri: data.item.avatar }}
+        style={{ width: 40, height: 40, margin: 6 }}
+      />
+      <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
+    </TouchableOpacity>
+
+  renderChannel = data =>
+    <TouchableOpacity
+      style={[sendStyles.list, data.item.selectedClass]}
+      onPress={() => this.selectChannel(data)}
+    >
+      <Emoji
+        name={ data.item.avatar }
         style={{ width: 40, height: 40, margin: 6 }}
       />
       <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
@@ -165,7 +181,7 @@ export default class Send extends Component {
         <FlatList
           data={this.state.channels}
           ItemSeparatorComponent={this.FlatListItemSeparator}
-          // renderItem={item => this.renderFriend(item)}
+          renderItem={item => this.renderChannel(item)}
           keyExtractor={item => item.id.toString()}
           extraData={this.state}
           bottomDivider
