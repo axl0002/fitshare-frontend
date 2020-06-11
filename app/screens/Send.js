@@ -186,7 +186,12 @@ export default class Send extends Component {
           bottomDivider
         /> */}
 
-        <Text>Friends</Text>
+        <View style={[styles.centerObject,styles.searchBarLayer]}>
+        <Text style={styles.sendSearchLabel}>Send To</Text>
+        </View>
+        <View style = {{marginLeft: 10}}>
+        <Text style={styles.sendFriendsLabel}>Friends</Text>
+        </View>
         <FlatList
           data={this.state.friends}
           ItemSeparatorComponent={this.FlatListItemSeparator}
@@ -195,7 +200,9 @@ export default class Send extends Component {
           extraData={this.state}
           bottomDivider
         />
-        <Text>Channels</Text>
+        <View style = {{marginLeft: 10}}>
+        <Text style={styles.sendFriendsLabel}>Channels</Text>
+        </View>
         <FlatList
           data={this.state.channels}
           ItemSeparatorComponent={this.FlatListItemSeparator}

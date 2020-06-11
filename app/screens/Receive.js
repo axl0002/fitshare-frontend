@@ -45,8 +45,7 @@ class Receive extends Component {
   );
     return (
       <View style = {styles.container}>
-        <View style={{paddingTop:20}}>
-          <Text> { this.state.metadata } </Text>
+        <View>
           <View>
             <Video
               source={{
@@ -58,6 +57,26 @@ class Receive extends Component {
               repeat={true}
               hideShutterView={true}
             />
+          </View>
+        </View>
+        <View style ={{position: 'absolute', left: -20, top: -10}}>
+        <Button
+        type="clear"
+        icon = {
+          <Icon
+            reverse
+            className="material-icons"
+            name="keyboard-backspace"
+            color='transparent'
+            size={47}
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+        }
+        />
+        </View>
+        <View  style ={{position: 'absolute', left: 35, right:35, top: 90}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center', backgroundColor: '#a9efe595', borderRadius:10,}}>
+            <Text style={styles.sendSearchLabel}> { this.state.metadata } </Text>
           </View>
         </View>
         <View  style ={{position: 'absolute', left: 0, right: 0, bottom: 10}}>
