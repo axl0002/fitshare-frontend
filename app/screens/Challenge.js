@@ -52,9 +52,9 @@ class Challenge extends Component {
         <View style = {styles.container}>
 
           <View style={{marginTop: paddingSmall, marginHorizontal: 10}}>
-
-            <Text style={[styles.centerObject,styles.challengeFormLabel]}>Name of Exercise</Text>
-
+            <View style={{paddingVertical:10}}>
+              <Text style={[styles.centerObject,styles.challengeFormLabel]}>Name of Exercise</Text>
+            </View>
             <TextInput
             placeholder="Exercise"
             style={styles.challengeFormInput}
@@ -64,8 +64,9 @@ class Challenge extends Component {
             />
           </View>
           <View style={{marginTop: paddingSmall, marginHorizontal: 10}}>
-            <Text style={[styles.centerObject,styles.challengeFormLabel]}>Distance/ Sets and Reps/ Time</Text>
-
+            <View style={{paddingVertical:10}}>
+              <Text style={[styles.centerObject,styles.challengeFormLabel]}>Distance/ Sets and Reps/ Time</Text>
+            </View>
             <TextInput
             placeholder="Description"
             style={styles.challengeFormInput}
