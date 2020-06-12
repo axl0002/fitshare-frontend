@@ -8,6 +8,7 @@ import UserContext from '../context/UserContext';
 
 import styles from './../css/Styles';
 import sendStyles from './../css/SendScreenStyles';
+import UserAvatar from '../components/Avatar';
 
 export default class Send extends Component {
 
@@ -140,10 +141,8 @@ export default class Send extends Component {
       style={[sendStyles.list, data.item.selectedClass]}
       onPress={() => this.selectFriend(data)}
     >
-      <Image
-        source={{ uri: data.item.avatar }}
-        style={{ width: 40, height: 40, margin: 6 }}
-      />
+
+      <UserAvatar id={data.item.id} width = {50}/>
       <Text style={sendStyles.lightText}>  {data.item.name}  </Text>
     </TouchableOpacity>
 
