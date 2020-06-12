@@ -233,8 +233,8 @@ export default class Camera extends Component {
   upload() {
     this.props.navigation.navigate('Send',
     {
-      exercise: this.state.exercise,
-      description: this.state.description,
+      // exercise: this.state.exercise,
+      // description: this.state.description,
       challenge: this.state.challenge,
       uri: this.state.uri,
     }
