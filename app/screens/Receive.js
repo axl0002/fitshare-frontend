@@ -43,22 +43,22 @@ class Receive extends Component {
           </TouchableOpacity>
         </View>
   );
-  //uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key)
-  //'https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_10mb.mp4'
+    console.log(this.state.s3key);
     return (
       <View style = {styles.container}>
-        <View style = {styles.video}>
-          <Video
-            source={{
-              uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-            }}
-            style={styles.video}
-            controls={false}
-            resizeMode={'cover'}
-            repeat={true}
-            hideShutterView={true}
-            style={styles.video}
-          />
+        <View>
+          <View>
+            <Video
+              source={{
+                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key).concat('.mp4'),
+              }}
+              style={styles.video}
+              controls={false}
+              resizeMode={'cover'}
+              repeat={true}
+              hideShutterView={true}
+            />
+          </View>
         </View>
         <View style ={{position: 'absolute', left: -20, top: -10}}>
         <Button
