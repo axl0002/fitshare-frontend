@@ -9,7 +9,7 @@ import Emoji from 'react-native-emoji';
 import styles from './../css/Styles';
 
 import UserContext from '../context/UserContext';
-
+import UserAvatar from '../components/Avatar';
 
 export default class Home extends Component {
   static contextType = UserContext;
@@ -270,13 +270,7 @@ export default class Home extends Component {
               <TouchableOpacity onPress={() => this.open(item.item.id)}>
                 <View style = {{ flex: 1, flexDirection: 'row'}}>
                   <View>
-                    <Avatar
-                      rounded
-                      style={{ width: 50, height: 50, margin: 6 }}
-                      source={{
-                        uri:'https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320086059654790795.png',
-                      }}
-                      />
+                      <UserAvatar id={item.item.id} width = {50}/>
                   </View>
                   <View style = {{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
                     <Text>  {item.item.name}  </Text>
