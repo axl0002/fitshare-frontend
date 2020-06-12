@@ -43,13 +43,14 @@ class Receive extends Component {
           </TouchableOpacity>
         </View>
   );
+    console.log(this.state.s3key);
     return (
       <View style = {styles.container}>
         <View>
           <View>
             <Video
               source={{
-                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key),
+                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key).concat('.mp4'),
               }}
               style={styles.video}
               controls={false}
