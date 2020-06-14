@@ -236,7 +236,7 @@ export default class Camera extends Component {
       // exercise: this.state.exercise,
       // description: this.state.description,
       challenge: this.state.challenge,
-      uri: this.state.uri,
+      uri: this.state.uri.replace('file://', ''),
     }
     );
   }
