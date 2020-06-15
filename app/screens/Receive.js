@@ -46,19 +46,21 @@ class Receive extends Component {
     console.log(this.state.s3key);
     return (
       <View style = {styles.container}>
-        <View>
-          <View>
-            <Video
-              source={{
-                uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key).concat('.mp4'),
-              }}
-              style={styles.video}
-              controls={false}
-              resizeMode={'cover'}
-              repeat={true}
-              hideShutterView={true}
-            />
-          </View>
+        <View style = {styles.video}>
+          <Video
+            source={{
+              uri: 'https://d10l22hqwt0sax.cloudfront.net/'.concat(this.state.s3key).concat('.mp4'),
+            }}
+            style={styles.video}
+            controls={false}
+            resizeMode={'cover'}
+            repeat={true}
+            hideShutterView={true}
+            onLoad = { load => console.log('Video LOAD', load) }
+            onLoadStart = { loadStart => console.log('Video LOAD Start', loadStart) }
+            onBuffer = { onBuffer => console.log('Buffering', onBuffer)}
+            onError = { err => console.log('ERROR', err)}
+          />
         </View>
         <View style ={{position: 'absolute', left: -20, top: -10}}>
         <Button
@@ -87,7 +89,10 @@ class Receive extends Component {
         </View>
       </View>
     );
+
+    
   }
+
 }
 
 export default function(props) {
