@@ -59,7 +59,6 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#888891',
-    paddingTop:20,
   },
   sendFriendsLabel: {
     // fontFamily: "Segoe UI",
@@ -75,7 +74,6 @@ export default StyleSheet.create({
   },
   searchBarContainer: {
     backgroundColor: '#a9efe5',
-    paddingTop: 20,
   },
   searchBarInput: {
     backgroundColor: '#7ee7d7',

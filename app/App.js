@@ -3,13 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Component } from 'react';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Challenge from './screens/Challenge';
 import Camera from './screens/Camera';
-import Channels from './screens/Channels'
+import Channels from './screens/Channels';
 import Login from './screens/Login';
 import Receive from './screens/Receive';
 import Send from './screens/Send';
@@ -107,7 +108,9 @@ class App extends Component {
       var userData = Object.assign({}, this.state.data.user, {signOut: this.signOut});
       return (
         <UserContext.Provider value={userData}>
+        <SafeAreaProvider>
           <NavStack />
+        </SafeAreaProvider>
         </UserContext.Provider>
       );
     }
